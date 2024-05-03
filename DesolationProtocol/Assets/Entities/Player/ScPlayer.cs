@@ -31,6 +31,11 @@ public class ScPlayer : MonoBehaviour
         _transform.transform.Rotate(_transform.right, -1 * Input.GetAxis("MouseY") * sens, Space.World);
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     public void Movement(InputAction.CallbackContext CallbackContext)
     {
         if (CallbackContext.performed || CallbackContext.canceled)
