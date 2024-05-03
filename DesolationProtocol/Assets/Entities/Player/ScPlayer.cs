@@ -14,42 +14,18 @@ public class ScPlayer : MonoBehaviour
     private Transform _transform;
     [SerializeField] private float sens = 1;
 
-    [Header("Animation")]
-    [SerializeField] private string _xAxisName = "xAxis";
-    [SerializeField] private string _zAxisName = "zAxis";
-
-    private Animator _anim;
-    private float _xAxis, _zAxis;
-
-
     private void Awake()
     {
         _entity = GetComponentInParent<ScEntity>();
         _rigidbody = GetComponentInParent<Rigidbody>();
         _transform = GetComponentInChildren<Transform>();
-        _anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
         _transform.transform.Rotate(_transform.right, -1 * Input.GetAxis("MouseY") * sens, Space.World);
-
-        _xAxis = Input.GetAxis("Horizontal"); // Hablar con Casa
-        _zAxis = Input.GetAxis("Vertical"); // Hablar con Casa
-
-        _anim.SetFloat(_xAxisName, _xAxis);  // Hablar con Casa
-        _anim.SetFloat(_zAxisName, _zAxis);  // Hablar con Casa
     }
-
-    private void FixedUpdate() // Hablar con Casa
-    {
-        if (_xAxis != 0 || _zAxis != 0)
-        {
-
-        }
-    }
-
 
     public void Movement(InputAction.CallbackContext CallbackContext)
     {

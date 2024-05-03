@@ -39,6 +39,8 @@ public class ScEntity : MonoBehaviour
     [SerializeField] private string _xAxisName = "xAxis";
     [SerializeField] private string _zAxisName = "zAxis";
 
+    private float _xAxis, _zAxis;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -63,6 +65,9 @@ public class ScEntity : MonoBehaviour
     private void Update()
     {
         Velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude;
+
+        _anim.SetFloat(_xAxisName, _xAxis);  // Hablar con Casa
+        _anim.SetFloat(_zAxisName, _zAxis);  // Hablar con Casa
     }
 
     private void FixedUpdate()
