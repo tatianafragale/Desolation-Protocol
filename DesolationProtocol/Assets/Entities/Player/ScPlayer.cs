@@ -14,12 +14,15 @@ public class ScPlayer : MonoBehaviour
     private Transform _transform;
     [SerializeField] private float sens = 1;
 
+    public Animator anim;
+
 
     private void Awake()
     {
         _entity = GetComponentInParent<ScEntity>();
         _rigidbody = GetComponentInParent<Rigidbody>();
         _transform = GetComponentInChildren<Transform>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
