@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Maps/Scenes/Main_Menu.unity
+    guid: 9d15746b889ba3542b970d457fa73236
+  - enabled: 1
+    path: Assets/Maps/Scenes/Level_MilitaryBase.unity
+    guid: 1c6053fa2bf060a458a366ee1b4455b2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9036b7113c5634244bd7b935efa8ea3c, type: 2}
