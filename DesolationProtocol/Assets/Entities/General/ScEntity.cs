@@ -35,10 +35,6 @@ public class ScEntity : MonoBehaviour
 
     private Animator _anim;
 
-    [Header("Animation")]
-    [SerializeField] private string _xAxisName = "xAxis";
-    [SerializeField] private string _zAxisName = "zAxis";
-
     private float _xAxis, _zAxis;
 
     private void Awake()
@@ -66,8 +62,8 @@ public class ScEntity : MonoBehaviour
     {
         Velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude;
 
-        _anim.SetFloat(_xAxisName, _xAxis);  // Hablar con Casa
-        _anim.SetFloat(_zAxisName, _zAxis);  // Hablar con Casa
+        _xAxis = Input.GetAxisRaw("Horizontal"); // Hablar con Casa
+        _zAxis = Input.GetAxisRaw("Vertical"); // Hablar con Casa
     }
 
     private void FixedUpdate()
@@ -87,6 +83,10 @@ public class ScEntity : MonoBehaviour
                     _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 20 * airControl, ForceMode.Acceleration);
                 }
             }
+
+            _anim.SetFloat("ZAxis", _zAxis); // Hablar con Casa
+            _anim.SetFloat("XAxis", _xAxis); // Hablar con Casa
+
         }
 
         //Regen
