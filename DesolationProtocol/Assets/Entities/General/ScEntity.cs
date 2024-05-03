@@ -33,10 +33,18 @@ public class ScEntity : MonoBehaviour
 
     public ScAbilityHolder abilityHolder;
 
+    private Animator _anim;
+
+    [Header("Animation")]
+    [SerializeField] private string _xAxisName = "xAxis";
+    [SerializeField] private string _zAxisName = "zAxis";
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         abilityHolder = GetComponent<ScAbilityHolder>();
+
+        _anim = GetComponent<Animator>();
     }
 
     void Start()
