@@ -62,8 +62,8 @@ public class ScEntity : MonoBehaviour
     {
         Velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude;
 
-        _xAxis = Input.GetAxisRaw("Horizontal"); // Hablar con Casa
-        _zAxis = Input.GetAxisRaw("Vertical"); // Hablar con Casa
+        //_xAxis = Input.GetAxisRaw("Horizontal"); // Hablar con Casa
+        //_zAxis = Input.GetAxisRaw("Vertical"); // Hablar con Casa
     }
 
     private void FixedUpdate()
@@ -82,12 +82,12 @@ public class ScEntity : MonoBehaviour
                 {
                     _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 20 * airControl, ForceMode.Acceleration);
                 }
-            }
-
-            _anim.SetFloat("ZAxis", _zAxis); // Hablar con Casa
-            _anim.SetFloat("XAxis", _xAxis); // Hablar con Casa
-
+            }      
         }
+
+
+        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime); // Hablar con Casa
+        _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime); // Hablar con Casa
 
         //Regen
         if (health < Stats.maxHealth && Stats.regeneration > 0) Heal(Stats.regeneration * Time.fixedDeltaTime);
