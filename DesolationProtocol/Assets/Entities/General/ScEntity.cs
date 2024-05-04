@@ -35,8 +35,6 @@ public class ScEntity : MonoBehaviour
 
     private Animator _anim;
 
-    private float _xAxis, _zAxis;
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -61,9 +59,6 @@ public class ScEntity : MonoBehaviour
     private void Update()
     {
         Velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude;
-
-        //_xAxis = Input.GetAxisRaw("Horizontal"); // Hablar con Casa
-        //_zAxis = Input.GetAxisRaw("Vertical"); // Hablar con Casa
     }
 
     private void FixedUpdate()
