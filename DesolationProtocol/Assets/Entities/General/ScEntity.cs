@@ -81,8 +81,9 @@ public class ScEntity : MonoBehaviour
         }
 
 
-        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime); // Hablar con Casa
-        _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime); // Hablar con Casa
+        //Animaciones de mover
+        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime); 
+        _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime); 
 
         //Regen
         if (health < Stats.maxHealth && Stats.regeneration > 0) Heal(Stats.regeneration * Time.fixedDeltaTime);
@@ -116,8 +117,12 @@ public class ScEntity : MonoBehaviour
 
     public void Jump(bool forced = false)
     {
+        
+
         if (_jumps > 0 || forced)
         {
+            _anim.SetTrigger("Jump");
+
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
             _rigidbody.AddForce(_rigidbody.transform.up * Stats.jumpForce * 6f, ForceMode.VelocityChange);
             if (_jumps > 0)
@@ -131,6 +136,7 @@ public class ScEntity : MonoBehaviour
     {
         _jumps = totaljumps;
         landed = true;
+        _anim.SetTrigger("Land");
         _rigidbody.drag = 0;
     }
 
