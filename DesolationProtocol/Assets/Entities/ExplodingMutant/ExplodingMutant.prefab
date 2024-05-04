@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 6961921930915876864}
   Player: {fileID: 0}
+  Entity: {fileID: 0}
   WhatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
@@ -178,15 +179,15 @@ MonoBehaviour:
   FatMutant: {fileID: 5493894508233848889}
   Explosion: {fileID: 4697224650367693064}
   _explosionRange: 5
-  _maxHits: 0
+  _maxHits: 30
   _maxDamage: 40
   _minDamage: 70
   HitLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   BlockExplosionsLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
 --- !u!195 &6961921930915876864
 NavMeshAgent:
   m_ObjectHideFlags: 0
