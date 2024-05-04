@@ -8,11 +8,15 @@ public class ExplodingMutant : MonoBehaviour
 
     public NavMeshAgent Agent;
     public Transform Player;
-    public LayerMask WhatIsGround, WhatIsPlayer;
+    public LayerMask WhatIsPlayer;
     private bool _isExploding = false;
     [SerializeField] private float _attackRange;
     [SerializeField] private int _healthPoints;
-    public bool PlayerInAttackRange;
+    [SerializeField] private bool _playerInAttackRange;
+
+    [SerializeField] private int _explosionFrame = 111;
+
+    private Animator _anim; // TENDRIA SENTIDO QUE ESTO SALGA DIRECTO DESDE ENTITY
 
     // VARIABLES PARA LA EXPLOSION
     public GameObject FatMutant, Explosion;
@@ -23,6 +27,8 @@ public class ExplodingMutant : MonoBehaviour
     {
         Player = GameObject.Find("PlayerAsset").transform;
         Agent = GetComponent<NavMeshAgent>();
+        
+        _anim = GetComponentInChildren<Animator>();
 
         FatMutant.SetActive(true);
         Explosion.SetActive(false);
@@ -32,10 +38,10 @@ public class ExplodingMutant : MonoBehaviour
     {
         //Check if player is in attack range
 
-        PlayerInAttackRange = Physics.CheckSphere(transform.position, _attackRange, WhatIsPlayer);
+        _playerInAttackRange = Physics.CheckSphere(transform.position, _attackRange, WhatIsPlayer);
 
-        if (!PlayerInAttackRange && !_isExploding) ChasePlayer();
-        if (PlayerInAttackRange) ExplodingAttack();
+        if (!_playerInAttackRange && !_isExploding) ChasePlayer();
+        if (_playerInAttackRange) ExplodingAttack();
 
     }
 
@@ -47,16 +53,17 @@ public class ExplodingMutant : MonoBehaviour
     private void ExplodingAttack ()
     {
         Agent.SetDestination(transform.position);  // lo freno
-        transform.LookAt(Player);
+        //transform.LookAt(Player);
 
         _isExploding = true;  // uso este bool para que continue explotando aunque el jugador se escape
 
         // INSERTAR ANIM Y TIEMPO HASTA QUE EXPLOTE
 
-        Explode();
+        _anim.SetTrigger("ExplodeAttack");
+
     }
 
-    private void Explode ()
+    public void Explode ()
     {
         Explosion.SetActive(true);
         FatMutant.SetActive(false);
