@@ -6,12 +6,12 @@ using UnityEngine.AI; // Importante para el navmesh
 public class ExplodingMutant : MonoBehaviour
 {
 
-    public NavMeshAgent Agent;
+    [SerializeField] private NavMeshAgent _agent;
     public Transform Player;
     public LayerMask WhatIsPlayer;
     private bool _isExploding = false;
     [SerializeField] private float _attackRange;
-    [SerializeField] private int _healthPoints;
+    [SerializeField] private float _healthPoints;
     [SerializeField] private bool _playerInAttackRange;
 
     [SerializeField] private int _explosionFrame = 111;
@@ -23,13 +23,15 @@ public class ExplodingMutant : MonoBehaviour
 
     private AudioSource _audioSource;
 
-    
+    [SerializeField] private float _explosionRange;
+
+
 
     private void Awake()
     {
-        Player = GameObject.Find("PlayerAsset").transform;
-        Agent = GetComponent<NavMeshAgent>();
-        
+        Player = FindObjectOfType<ScPlayer>().transform;
+        _agent = GetComponent<NavMeshAgent>();
+
         _anim = GetComponentInChildren<Animator>();
 
         FatMutant.SetActive(true);
@@ -51,28 +53,54 @@ public class ExplodingMutant : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Agent.SetDestination(Player.position);
+        _agent.SetDestination(Player.position);
     }
 
-    private void ExplodingAttack ()
+    private void ExplodingAttack()
     {
-        Agent.SetDestination(transform.position);  // lo freno
-        //transform.LookAt(Player);
+        _agent.SetDestination(transform.position);  // lo freno
 
         _isExploding = true;  // uso este bool para que continue explotando aunque el jugador se escape
-
-        // INSERTAR ANIM Y TIEMPO HASTA QUE EXPLOTE
 
         _anim.SetTrigger("ExplodeAttack");
 
     }
 
-    public void Explode ()
+    public void TakeDamage(float incomingDamage) // ESTO EN REALIDAD HAY QUE HACERLO CON EL SCRIPT DE ENTITY
+    {
+
+        _healthPoints -= incomingDamage;
+        
+        //Validate Death
+        if (_healthPoints <= 0)
+        {
+            Explode();
+        }
+    }
+
+    public void Explode()
     {
         Explosion.SetActive(true);
         FatMutant.SetActive(false);
 
         _audioSource.Play();
+
+        Collider[] entitiesInRange = Physics.OverlapSphere(transform.position, _explosionRange);
+
+        foreach (Collider entity in entitiesInRange)
+        {
+            if (entity.GetComponent<ScEntity>() != null)
+            {
+                entity.GetComponent<ScEntity>().TakeDamage(70); // Deberiamos agregar ragdoll al script de entity cuando se comen la explosion
+            }
+
+        }
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _explosionRange);
+    }
 }
