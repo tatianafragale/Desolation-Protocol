@@ -70,11 +70,11 @@ public class ScEntity : MonoBehaviour
             {
                 if (landed)
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 10, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 50, ForceMode.Acceleration);
                 }
                 else
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 10 * airControl, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 50 * airControl, ForceMode.Acceleration);
                 }
             }
             else
