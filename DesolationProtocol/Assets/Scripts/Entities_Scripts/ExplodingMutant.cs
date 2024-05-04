@@ -24,8 +24,13 @@ public class ExplodingMutant : MonoBehaviour
     private AudioSource _audioSource;
 
     [SerializeField] private float _explosionRange;
+    [SerializeField] private int _maxHits;
+    [SerializeField] private int _maxDamage = 71;
+    [SerializeField] private int _minDamage = 30;
 
+    public LayerMask HitLayer, BlockExplosionsLayer;
 
+    private Collider[] _hits;
 
     private void Awake()
     {
@@ -38,6 +43,8 @@ public class ExplodingMutant : MonoBehaviour
         Explosion.SetActive(false);
 
         _audioSource = GetComponent<AudioSource>();
+
+        _hits = new Collider [_maxHits];
     }
 
     private void Update()
@@ -91,7 +98,7 @@ public class ExplodingMutant : MonoBehaviour
         {
             if (entity.GetComponent<ScEntity>() != null)
             {
-                entity.GetComponent<ScEntity>().TakeDamage(70); // Deberiamos agregar ragdoll al script de entity cuando se comen la explosion
+                entity.GetComponent<ScEntity>().TakeDamage(Random.Range(_minDamage, _maxDamage)); // Deberiamos agregar ragdoll al script de entity cuando se comen la explosion
             }
 
         }
