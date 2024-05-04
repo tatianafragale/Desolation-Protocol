@@ -20,7 +20,7 @@ public class ScEntity : MonoBehaviour
 
     public int totaljumps = 1;
     private int _jumps = 1;
-    private float airControl = 0.15f;
+    private float airControl = 0.2f;
 
     public Vector3 movement;
     public float Velocity;
@@ -61,18 +61,21 @@ public class ScEntity : MonoBehaviour
     {
         if (movement != Vector3.zero)
         {
-            float angleDifference = (Mathf.Atan2((Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement).x, (Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement).z) * Mathf.Rad2Deg) - (Mathf.Atan2(_rigidbody.velocity.x, _rigidbody.velocity.z) * Mathf.Rad2Deg);
-            angleDifference = Mathf.Repeat(angleDifference + 180f, 360f) - 180f;
-            if (Mathf.Abs(angleDifference) > 25 || new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= 10 * Stats.movementSpeed)
+            
+            if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= Stats.movementSpeed)
             {
                 if (landed)
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 20, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 10, ForceMode.Acceleration);
                 }
                 else
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 20 * airControl, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 10 * airControl, ForceMode.Acceleration);
                 }
+            }
+            else
+            {
+                _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).normalized * Stats.movementSpeed + Vector3.up * _rigidbody.velocity.y;
             }
         }
 
@@ -123,13 +126,13 @@ public class ScEntity : MonoBehaviour
     {
         _jumps = totaljumps;
         landed = true;
-        _rigidbody.drag = 0;
+        _rigidbody.drag = 0.1f;
     }
 
     public void OnAir()
     {
         _jumps = totaljumps - 1;
         landed = false;
-        _rigidbody.drag = 0.1f;
+        _rigidbody.drag = 0.5f;
     }
 }
