@@ -21,6 +21,8 @@ public class ExplodingMutant : MonoBehaviour
     // VARIABLES PARA LA EXPLOSION
     public GameObject FatMutant, Explosion;
 
+    private AudioSource _audioSource;
+
     
 
     private void Awake()
@@ -32,6 +34,8 @@ public class ExplodingMutant : MonoBehaviour
 
         FatMutant.SetActive(true);
         Explosion.SetActive(false);
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -67,7 +71,8 @@ public class ExplodingMutant : MonoBehaviour
     {
         Explosion.SetActive(true);
         FatMutant.SetActive(false);
-        
+
+        _audioSource.Play();
     }
 
 }
