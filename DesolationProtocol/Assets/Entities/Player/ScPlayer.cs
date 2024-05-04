@@ -14,7 +14,6 @@ public class ScPlayer : MonoBehaviour
     private Transform _transform;
     [SerializeField] private float sens = 1;
 
-
     private void Awake()
     {
         _entity = GetComponentInParent<ScEntity>();

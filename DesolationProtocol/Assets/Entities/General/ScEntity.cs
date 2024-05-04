@@ -33,10 +33,14 @@ public class ScEntity : MonoBehaviour
 
     public ScAbilityHolder abilityHolder;
 
+    private Animator _anim;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         abilityHolder = GetComponent<ScAbilityHolder>();
+
+        _anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -73,8 +77,12 @@ public class ScEntity : MonoBehaviour
                 {
                     _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 20 * airControl, ForceMode.Acceleration);
                 }
-            }
+            }      
         }
+
+
+        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime); // Hablar con Casa
+        _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime); // Hablar con Casa
 
         //Regen
         if (health < Stats.maxHealth && Stats.regeneration > 0) Heal(Stats.regeneration * Time.fixedDeltaTime);
