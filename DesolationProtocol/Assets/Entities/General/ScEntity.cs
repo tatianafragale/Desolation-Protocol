@@ -20,7 +20,7 @@ public class ScEntity : MonoBehaviour
 
     public int totaljumps = 1;
     private int _jumps = 1;
-    private float airControl = 0.2f;
+    private float airControl = 0.5f;
 
     public Vector3 movement;
     public float Velocity;
@@ -127,7 +127,7 @@ public class ScEntity : MonoBehaviour
             _anim.SetTrigger("Jump");
 
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
-            _rigidbody.AddForce(_rigidbody.transform.up * Stats.jumpForce * 6f, ForceMode.VelocityChange);
+            _rigidbody.AddForce(_rigidbody.transform.up * Stats.jumpForce * 5f, ForceMode.VelocityChange);
             if (_jumps > 0)
             {
                 _jumps--;
@@ -140,13 +140,13 @@ public class ScEntity : MonoBehaviour
         _jumps = totaljumps;
         landed = true;
         _anim.SetTrigger("Land");
-        _rigidbody.drag = 0;
+        _rigidbody.drag = 0.01f;
     }
 
     public void OnAir()
     {
         _jumps = totaljumps - 1;
         landed = false;
-        _rigidbody.drag = 0.5f;
+        _rigidbody.drag = 0.1f;
     }
 }
