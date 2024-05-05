@@ -1,25 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; // Importante para el navmesh
 
-public class ExplodingMutant : MonoBehaviour
+public class Exploding_Enemy : EnemyMovement
 {
 
-    [SerializeField] private NavMeshAgent _agent;
-    public Transform Player;
-    public Transform Entity;
-    public LayerMask WhatIsPlayer;
-    private bool _isExploding = false;
-    [SerializeField] private float _attackRange;
-    [SerializeField] private float _healthPoints;
-    [SerializeField] private bool _playerInAttackRange;
-
-    private Animator _anim; // TENDRIA SENTIDO QUE ESTO SALGA DIRECTO DESDE ENTITY
-
     // VARIABLES PARA LA EXPLOSION
+    private bool _isExploding = false;
     public GameObject FatMutant, Explosion;
-
+    public Transform Entity;
     private AudioSource _audioSource;
 
     [SerializeField] private float _explosionRange;
@@ -32,36 +21,9 @@ public class ExplodingMutant : MonoBehaviour
 
     private Collider[] _entitiesHit;
 
-    private void Awake()
+    void Update()
     {
-        Player = FindObjectOfType<ScPlayer>().transform;
-        Entity = FindObjectOfType<ScEntity>().transform;
-        _agent = GetComponent<NavMeshAgent>();
-
-        _anim = GetComponentInChildren<Animator>();
-
-        FatMutant.SetActive(true);
-        Explosion.SetActive(false);
-
-        _audioSource = GetComponent<AudioSource>();
-
-        _entitiesHit = new Collider[_maxHits];
-    }
-
-    private void Update()
-    {
-        //Check if player is in attack range
-
-        _playerInAttackRange = Physics.CheckSphere(transform.position, _attackRange, WhatIsPlayer);
-
-        if (!_playerInAttackRange && !_isExploding) ChasePlayer();
         if (_playerInAttackRange) ExplodingAttack();
-
-    }
-
-    private void ChasePlayer()
-    {
-        _agent.SetDestination(Player.position);
     }
 
     private void ExplodingAttack()
@@ -72,18 +34,6 @@ public class ExplodingMutant : MonoBehaviour
 
         _anim.SetTrigger("ExplodeAttack");
 
-    }
-
-    public void TakeDamage(float incomingDamage) // ESTO EN REALIDAD HAY QUE HACERLO CON EL SCRIPT DE ENTITY
-    {
-
-        _healthPoints -= incomingDamage;
-
-        //Validate Death
-        if (_healthPoints <= 0)
-        {
-            Explode();
-        }
     }
 
     public void Explode()
@@ -97,7 +47,7 @@ public class ExplodingMutant : MonoBehaviour
         // No Pega a traves de las paredes
 
         Ray _explosionRay = new Ray(transform.position, Entity.position);
-        
+
         if (Physics.Raycast(_explosionRay, out RaycastHit hit))
         {
             int _totalHits = Physics.OverlapSphereNonAlloc(transform.position, _explosionRange, _entitiesHit, HitLayer);
@@ -117,7 +67,7 @@ public class ExplodingMutant : MonoBehaviour
                 }
             }
         }
-        
+
 
 
         //Funciona pero tambien golpea a traves de las paredes - OBSOLETO
