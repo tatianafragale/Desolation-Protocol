@@ -76,8 +76,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5293862195045582783}
   - component: {fileID: 290773438192053894}
-  - component: {fileID: 5710869145430913046}
   - component: {fileID: 8524657632471293446}
+  - component: {fileID: 5710869145430913046}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Player
@@ -114,28 +114,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
-  entityName: 
-  Stats:
-    maxHealth: 100
-    regeneration: 0
-    armor: 10
-    damage: 10
-    attackSpeed: 1
-    movementSpeed: 1
-    jumpForce: 1
-    critPercent: 1
-    critMultiplier: 1.2
-    cooldowns: 1
-  health: 100
-  level: 0
-  experience: 0
-  Team: 
   totaljumps: 1
   movement: {x: 0, y: 0, z: 0}
   Velocity: 0
   landed: 1
   OnLandCollider: {fileID: 7080899836355625068}
   abilityHolder: {fileID: 0}
+--- !u!114 &8524657632471293446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121600336752070713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47516f8bdfeb4384d84bf20716f0a616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  ability: []
 --- !u!54 &5710869145430913046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,21 +161,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &8524657632471293446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121600336752070713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47516f8bdfeb4384d84bf20716f0a616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 0}
-  ability:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}

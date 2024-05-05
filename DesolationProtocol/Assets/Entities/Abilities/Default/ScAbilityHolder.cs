@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class ScAbilityHolder : MonoBehaviour
 {
     public ScEntity entity;
-    public ScAbility[] ability = new ScAbility[4];
+    public ScAbility[] ability;
 
 
     private void Awake()

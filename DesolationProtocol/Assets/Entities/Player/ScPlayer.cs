@@ -4,6 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UIElements;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -13,12 +14,15 @@ public class ScPlayer : MonoBehaviour
     private Rigidbody _rigidbody;
     private Transform _transform;
     [SerializeField] private float sens = 1;
+    private Animator _anim;
+    public Vector3 movement;
 
     private void Awake()
     {
         _entity = GetComponentInParent<ScEntity>();
         _rigidbody = GetComponentInParent<Rigidbody>();
         _transform = GetComponentInChildren<Transform>();
+        _anim = GetComponentInParent<Animator>();
     }
 
     private void Update()
@@ -29,6 +33,25 @@ public class ScPlayer : MonoBehaviour
         //_transform.transform.rotation = Quaternion.Euler(_transform.rotation.eulerAngles.x + Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), 0f, 0f);
 
         //print(_transform.rotation);
+
+        if (movement != Vector3.zero)
+        {
+
+            if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= _entity.Stats.movementSpeed)
+            {
+                if (_entity.landed)
+                {
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 10, ForceMode.Acceleration);
+                }
+                else
+                {
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 10 * _entity.airControl, ForceMode.Acceleration);
+                }
+            }
+        }
+
+        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime);
+        _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime);
     }
 
     public void Test(InputAction.CallbackContext CallbackContext)
@@ -43,7 +66,7 @@ public class ScPlayer : MonoBehaviour
     {
         if (CallbackContext.performed || CallbackContext.canceled)
         {
-            _entity.movement = new Vector3(CallbackContext.ReadValue<Vector2>().x, 0f, CallbackContext.ReadValue<Vector2>().y);
+            movement = new Vector3(CallbackContext.ReadValue<Vector2>().x, 0f, CallbackContext.ReadValue<Vector2>().y);
         }
     }
 

@@ -20,9 +20,8 @@ public class ScEntity : MonoBehaviour
 
     public int totaljumps = 1;
     private int _jumps = 1;
-    private float airControl = 0.8f;
+    public float airControl = 0.8f;
 
-    public Vector3 movement;
     public float Velocity;
 
     public bool landed = true;
@@ -39,7 +38,6 @@ public class ScEntity : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         abilityHolder = GetComponent<ScAbilityHolder>();
-
         _anim = GetComponent<Animator>();
     }
 
@@ -58,38 +56,14 @@ public class ScEntity : MonoBehaviour
 
     private void Update()
     {
-        Velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude;
+        
     }
 
     private void FixedUpdate()
     {
-        if (movement != Vector3.zero)
-        {
-            
-            if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= Stats.movementSpeed)
-            {
-                if (landed)
-                {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 50, ForceMode.Acceleration);
-                }
-                else
-                {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 50 * airControl, ForceMode.Acceleration);
-                }
-            }
-            else
-            {
-                _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).normalized * Stats.movementSpeed + Vector3.up * _rigidbody.velocity.y;
-            }
-        }
-
-
-        //Animaciones de mover
-        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime); 
-        _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime); 
-
         //Regen
         if (health < Stats.maxHealth && Stats.regeneration > 0) Heal(Stats.regeneration * Time.fixedDeltaTime);
+        Velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude;
     }
 
     //Health
@@ -125,7 +99,6 @@ public class ScEntity : MonoBehaviour
 
     public void Jump(bool forced = false)
     {
-        
 
         if (_jumps > 0 || forced)
         {
@@ -146,7 +119,6 @@ public class ScEntity : MonoBehaviour
         _jumps = totaljumps;
         landed = true;
         _anim.SetBool("Landed", landed);
-        _rigidbody.drag = 0.01f;
     }
 
     public void OnAir()
@@ -154,6 +126,5 @@ public class ScEntity : MonoBehaviour
         _jumps = totaljumps - 1;
         landed = false;
         _anim.SetBool("Landed", landed);
-        _rigidbody.drag = 0.1f;
     }
 }
