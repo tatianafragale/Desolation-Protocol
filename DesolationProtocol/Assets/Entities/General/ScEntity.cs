@@ -20,7 +20,7 @@ public class ScEntity : MonoBehaviour
 
     public int totaljumps = 1;
     private int _jumps = 1;
-    private float airControl = 0.5f;
+    private float airControl = 0.8f;
 
     public Vector3 movement;
     public float Velocity;
@@ -108,8 +108,13 @@ public class ScEntity : MonoBehaviour
         //Validate Death
         if (health <= 0)
         {
-            //morir
+            Die();
         }
+    }
+
+    private void Die()
+    {
+
     }
 
     public void Heal(float heal)
@@ -137,9 +142,10 @@ public class ScEntity : MonoBehaviour
 
     public void OnLand()
     {
+        _anim.SetTrigger("Land");
         _jumps = totaljumps;
         landed = true;
-        _anim.SetTrigger("Land");
+        _anim.SetBool("Landed", landed);
         _rigidbody.drag = 0.01f;
     }
 
@@ -147,6 +153,7 @@ public class ScEntity : MonoBehaviour
     {
         _jumps = totaljumps - 1;
         landed = false;
+        _anim.SetBool("Landed", landed);
         _rigidbody.drag = 0.1f;
     }
 }

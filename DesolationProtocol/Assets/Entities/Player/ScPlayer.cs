@@ -24,7 +24,19 @@ public class ScPlayer : MonoBehaviour
     private void Update()
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
-        _transform.transform.Rotate(_transform.right, -1 * Input.GetAxis("MouseY") * sens, Space.World);
+        _transform.Rotate(_transform.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
+        //_transform.rotation = Quaternion.Euler(10f,0f,0f);
+        //_transform.transform.rotation = Quaternion.Euler(_transform.rotation.eulerAngles.x + Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), 0f, 0f);
+
+        //print(_transform.rotation);
+    }
+
+    public void Test(InputAction.CallbackContext CallbackContext)
+    {
+        if (CallbackContext.performed)
+        {
+            _transform.transform.Rotate(_transform.right, 10, Space.World);
+        }
     }
 
     public void Movement(InputAction.CallbackContext CallbackContext)
