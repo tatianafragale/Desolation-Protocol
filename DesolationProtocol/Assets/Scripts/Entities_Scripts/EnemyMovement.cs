@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] protected NavMeshAgent _agent;
     public Transform Player;
-    public LayerMask WhatIsPlayer;
+    [SerializeField] protected LayerMask WhatIsPlayer;
     [SerializeField] private float _attackRange;
     [SerializeField] private float _healthPoints;
     protected bool _playerInAttackRange;

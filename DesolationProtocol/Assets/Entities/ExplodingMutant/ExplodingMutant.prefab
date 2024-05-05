@@ -173,9 +173,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _attackRange: 1.25
-  _healthPoints: 1
+  _healthPoints: 10
   _playerInAttackRange: 0
-  _explosionFrame: 111
   FatMutant: {fileID: 5493894508233848889}
   Explosion: {fileID: 4697224650367693064}
   _explosionRange: 5

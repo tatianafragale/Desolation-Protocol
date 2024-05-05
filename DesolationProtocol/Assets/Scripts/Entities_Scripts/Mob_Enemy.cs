@@ -8,6 +8,9 @@ public class Mob_Enemy : EnemyMovement
     [SerializeField] private float _timeBetweenAttacks;
     [SerializeField] private int _maxAttackDMG;
     [SerializeField] private int _minAttackDMG;
+    [SerializeField] private int _dmgRange;
+
+    private bool _enemyInHitDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,7 @@ public class Mob_Enemy : EnemyMovement
 
     private void Attack ()
     {
-        _agent.SetDestination(transform.position);
+        _agent.SetDestination(transform.position); // No se si en este caso queremos frenarlo. Tal vez haga que nunca le pegue
         transform.LookAt(Player);
 
         if (!_alreadyAttacked)
@@ -36,7 +39,12 @@ public class Mob_Enemy : EnemyMovement
 
     private void DamagePoint()
     {
-        GetComponent<ScEntity>().TakeDamage(Random.Range(_minAttackDMG, _maxAttackDMG));
+        _enemyInHitDistance = Physics.CheckSphere(transform.position, _dmgRange, WhatIsPlayer);
+
+        if (_enemyInHitDistance)
+        {
+            GetComponent<ScEntity>().TakeDamage(Random.Range(_minAttackDMG, _maxAttackDMG));
+        }  
     }
     
     private void ResetAttack()
