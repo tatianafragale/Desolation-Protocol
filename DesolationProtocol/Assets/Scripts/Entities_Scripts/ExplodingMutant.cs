@@ -112,7 +112,6 @@ public class ExplodingMutant : MonoBehaviour
                     if (!Physics.Raycast(hit.point, (_entitiesHit[i].transform.position - hit.point).normalized, distance, BlockExplosionsLayer.value))
                     {
                         _entitiesHit[i].GetComponent<ScEntity>().TakeDamage(Random.Range(_minDamage, _maxDamage));
-                        Debug.Log("Take Damage");
                     }
                 }
             }
