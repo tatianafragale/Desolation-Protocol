@@ -116,7 +116,8 @@ public class ExplodingMutant : MonoBehaviour
                 }
             }
         }
-        
+
+        Invoke("WaitForDestroy", 3);
 
 
         //Funciona pero tambien golpea a traves de las paredes - OBSOLETO
@@ -134,6 +135,11 @@ public class ExplodingMutant : MonoBehaviour
     }
 
 
+    private void WaitForDestroy ()
+    {
+        Destroy(gameObject);
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
