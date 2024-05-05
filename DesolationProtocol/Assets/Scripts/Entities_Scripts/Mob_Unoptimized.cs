@@ -68,7 +68,7 @@ public class Mob_Unoptimized : MonoBehaviour
 
         if (_enemyInHitDistance)
         {
-            GetComponent<ScEntity>().TakeDamage(Random.Range(_minAttackDMG, _maxAttackDMG));
+            Player.GetComponent<ScEntity>().TakeDamage(Random.Range(_minAttackDMG, _maxAttackDMG));
         }
     }
 
