@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using static UnityEngine.InputSystem.InputAction;
 
 public class ScPlayer : MonoBehaviour
@@ -17,12 +18,16 @@ public class ScPlayer : MonoBehaviour
     private Animator _anim;
     public Vector3 movement;
 
+
+
     private void Awake()
     {
         _entity = GetComponentInParent<ScEntity>();
         _rigidbody = GetComponentInParent<Rigidbody>();
         _transform = GetComponentInChildren<Transform>();
         _anim = GetComponentInParent<Animator>();
+
+
     }
 
     private void Update()
@@ -131,4 +136,7 @@ public class ScPlayer : MonoBehaviour
     {
         TryAbility(CallbackContext, 3);
     }
+
+
+
 }

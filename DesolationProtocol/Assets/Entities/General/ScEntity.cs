@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class ScEntity : MonoBehaviour
@@ -37,6 +37,8 @@ public class ScEntity : MonoBehaviour
 
     private bool _isDead = false;
 
+    [SerializeField] private ScGM Manager;
+
     //effects
     public bool silenced = false;
 
@@ -62,6 +64,11 @@ public class ScEntity : MonoBehaviour
         SetStats();
         _jumps = totaljumps;
         health = Stats.maxHealth;
+
+        if (Manager != null)
+        {
+            Manager.CountHP();
+        }
     }
 
     private void SetStats()
@@ -102,6 +109,10 @@ public class ScEntity : MonoBehaviour
             else { }
            
         }
+        if (Manager != null)
+        {
+            Manager.CountHP();
+        }
     }
 
     private void Die()
@@ -115,6 +126,10 @@ public class ScEntity : MonoBehaviour
         OnHeal.Invoke();
         health += heal;
         if (health > Stats.maxHealth) health = Stats.maxHealth;
+        if (Manager != null)
+        {
+            Manager.CountHP();
+        }
     }
 
     public void Jump(bool forced = false)
