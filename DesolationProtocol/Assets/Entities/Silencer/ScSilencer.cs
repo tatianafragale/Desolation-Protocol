@@ -5,7 +5,8 @@ using UnityEngine;
 public class ScSilencer : MonoBehaviour
 {
     private ScEnemyChase chase;
-    [SerializeField] private float distance = 10f;
+    [SerializeField] private float walkDistance = 20f;
+    [SerializeField] private float SilenceDistance = 40f;
     private Animator _anim;
 
     private void Awake()
@@ -28,15 +29,21 @@ public class ScSilencer : MonoBehaviour
 
     private void DetectDistance()
     {
-        if (Vector3.Distance(chase._target.position, transform.position) < distance)
+        if (Vector3.Distance(chase._target.position, transform.position) < SilenceDistance) 
         {
-            chase.Stop();
-            _anim.SetBool("InRange", true);
-        }
-        else
-        {
-            chase.KeepMoving();
-            _anim.SetBool("InRange", false);
+
+            if (Vector3.Distance(chase._target.position, transform.position) < walkDistance)
+            {
+                chase.Stop();
+                _anim.SetBool("InRange", true);
+            }
+            else
+            {
+                chase.KeepMoving();
+                _anim.SetBool("InRange", false);
+            }
         }
     }
+
+    
 }

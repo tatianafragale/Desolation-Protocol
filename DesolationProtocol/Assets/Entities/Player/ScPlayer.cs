@@ -29,10 +29,11 @@ public class ScPlayer : MonoBehaviour
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
         _transform.Rotate(_transform.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
-        //_transform.rotation = Quaternion.Euler(10f,0f,0f);
-        //_transform.transform.rotation = Quaternion.Euler(_transform.rotation.eulerAngles.x + Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), 0f, 0f);
 
-        //print(_transform.rotation);
+    }
+
+    private void FixedUpdate()
+    {
 
         if (movement != Vector3.zero)
         {
@@ -41,24 +42,32 @@ public class ScPlayer : MonoBehaviour
             {
                 if (_entity.landed)
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 10, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 4, ForceMode.Acceleration);
                 }
                 else
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 10 * _entity.airControl, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 4 * _entity.airControl, ForceMode.Acceleration);
                 }
             }
+            else
+            {
+                _rigidbody.velocity = _rigidbody.velocity.normalized * _entity.Stats.movementSpeed;
+            }
+        }
+        else
+        {
+            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x * 0.9f, _rigidbody.velocity.y, _rigidbody.velocity.z * 0.9f);
         }
 
-        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime);
         _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime);
+        _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime);
     }
 
     public void Test(InputAction.CallbackContext CallbackContext)
     {
         if (CallbackContext.performed)
         {
-            _transform.transform.Rotate(_transform.right, 10, Space.World);
+            
         }
     }
 
@@ -88,7 +97,7 @@ public class ScPlayer : MonoBehaviour
 
     private void TryAbility(InputAction.CallbackContext CallbackContext, int Selected)
     {
-        if (CallbackContext.performed) _entity.abilityHolder.TryAbility(Selected);
+        if (CallbackContext.performed) _entity.TryAbility(Selected);
     }
 
     public void TryAbility0(InputAction.CallbackContext CallbackContext)

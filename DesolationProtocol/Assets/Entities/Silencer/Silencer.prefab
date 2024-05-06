@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 0}
   _target: {fileID: 0}
+  _active: 1
 --- !u!114 &3425223465122276787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,4 +191,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b685e449fe1a5fd499a11504cdcd8165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 10
+  walkDistance: 20
+  SilenceDistance: 40

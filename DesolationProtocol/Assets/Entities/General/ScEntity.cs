@@ -5,18 +5,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ScEntity : MonoBehaviour
 {
     [SerializeField] private ScStatsLevel linkStats;
     public string entityName;
+    public string Team = "";
     public ScStats Stats;
 
     public float health = 100f;
     public int level = 0;
     public float experience = 0f;
-
-    public string Team = "";
 
     public int totaljumps = 1;
     private int _jumps = 1;
@@ -30,15 +30,24 @@ public class ScEntity : MonoBehaviour
 
     public Collider OnLandCollider;
 
-    public ScAbilityHolder abilityHolder;
-
     private Animator _anim;
+
+    public ScAbility[] abilities;
+
+    //effects
+    public bool silenced = false;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        abilityHolder = GetComponent<ScAbilityHolder>();
         _anim = GetComponent<Animator>();
+        foreach (ScAbility _ability in abilities)
+        {
+            if (_ability)
+            {
+                _ability.cooldown.ResetCooldown();
+            }
+        }
     }
 
     void Start()
@@ -52,11 +61,6 @@ public class ScEntity : MonoBehaviour
     {
         Stats = linkStats.GetStats(entityName, level); //get stats per lvl
         //items modifiers
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -126,5 +130,31 @@ public class ScEntity : MonoBehaviour
         _jumps = totaljumps - 1;
         landed = false;
         _anim.SetBool("Landed", landed);
+    }
+
+    public void TryAbility(int _selected)
+    {
+        if (silenced)
+        {
+            if (_selected < abilities.Length)
+            {
+                if (abilities[_selected])
+                {
+                    abilities[_selected].Try(this);
+                }
+                else
+                {
+                    print("No Ability");
+                }
+            }
+            else
+            {
+                print("No Slot");
+            }
+        }
+        else
+        {
+            //mensaje silenciado
+        }
     }
 }
