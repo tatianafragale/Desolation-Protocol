@@ -60,34 +60,6 @@ public class ExplodingMutant : MonoBehaviour
 
         _audioSource.Play();
 
-
-        // No Pega a traves de las paredes
-        /*
-        Ray _explosionRay = new Ray(transform.position, Entity.position);
-        
-        if (Physics.Raycast(_explosionRay, out RaycastHit hit))
-        {
-            int _totalHits = Physics.OverlapSphereNonAlloc(transform.position, _explosionRange, _entitiesHit, HitLayer);
-
-
-            for (int i = 0; i < _totalHits; i++)
-            {
-                if (_entitiesHit[i].GetComponent<ScEntity>())
-                {
-                    float distance = Vector3.Distance(hit.point, _entitiesHit[i].transform.position);
-
-                    if (!Physics.Raycast(hit.point, (_entitiesHit[i].transform.position - hit.point).normalized, distance, BlockExplosionsLayer.value))
-                    {
-                        _entitiesHit[i].GetComponent<ScEntity>().TakeDamage(Random.Range(_minDamage, _maxDamage));
-                    }
-                }
-            }
-        }*/
-
-
-
-        //Funciona pero tambien golpea a traves de las paredes - OBSOLETO, hola soy casa lo hice funcionar de mejor manera
-
         Collider[] entitiesInRange = Physics.OverlapSphere(transform.position, _explosionRange);
         foreach (Collider entity in entitiesInRange)
         {
@@ -117,7 +89,6 @@ public class ExplodingMutant : MonoBehaviour
         }
         Invoke("WaitForDestroy", 2);
     }
-
 
     private void WaitForDestroy()
     {

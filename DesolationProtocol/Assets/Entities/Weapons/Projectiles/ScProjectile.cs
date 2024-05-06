@@ -15,14 +15,20 @@ public class ScProjectile : MonoBehaviour
     private void Start()
     {
         _rigidbody.velocity = transform.forward * 5;
-        _rigidbody.AddForce(transform.forward*10);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<ScEntity>(out ScEntity otherEntity))
         {
-            otherEntity.TakeDamage(owner.Stats.damage);
+            if (owner != null && owner.Team != otherEntity.Team)
+            {
+                otherEntity.TakeDamage(owner.Stats.damage);
+            }
+            else
+            {
+                otherEntity.TakeDamage(10f);
+            }
         }
     }
 }

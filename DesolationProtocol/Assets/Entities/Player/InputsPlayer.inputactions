@@ -24,9 +24,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Test",
+                    "name": "Shoot",
                     "type": "Button",
-                    "id": "c6f89fe2-d254-4e58-bb1e-99a2052b2e0a",
+                    "id": "2808edd0-72d9-4a40-8b2f-337384484496",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -72,6 +72,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "c8af5100-ddd0-4ee8-a60e-22cc0c035da9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "c6f89fe2-d254-4e58-bb1e-99a2052b2e0a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -136,17 +145,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a92ca887-3318-4e53-82ca-146dbbf6ff00",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Test",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "80d59217-db2d-417e-8c29-cbae72b00dc6",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
@@ -208,6 +206,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e6b40a9-0e6d-41ad-af8a-0fc446c25597",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a92ca887-3318-4e53-82ca-146dbbf6ff00",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

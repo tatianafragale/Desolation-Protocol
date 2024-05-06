@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Spikewall : MonoBehaviour
 {
+    [SerializeField] private float timeClose;
+    [SerializeField] private float timeWait = 2f;
+    [SerializeField] private float timeOpen;
+
     private Quaternion initialRotation;
     private bool isRotating = false;
 

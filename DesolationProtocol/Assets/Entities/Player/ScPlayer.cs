@@ -95,10 +95,21 @@ public class ScPlayer : MonoBehaviour
         }
     }
 
+    public void Shoot(InputAction.CallbackContext CallbackContext)
+    {
+        if (CallbackContext.performed)
+        {
+            _entity.GetComponent<ScWeapon>().SetShooting(true);
+        }
+        if (CallbackContext.canceled)
+        {
+            _entity.GetComponent<ScWeapon>().SetShooting(false);
+        }
+    }
+
     private void TryAbility(InputAction.CallbackContext CallbackContext, int Selected)
     {
         if (CallbackContext.performed) _entity.TryAbility(Selected);
-        
     }
 
     public void TryAbility0(InputAction.CallbackContext CallbackContext)

@@ -12,7 +12,7 @@ public class ScWeapon : MonoBehaviour
     [SerializeField] private bool automatic;
 
     //funcionamiento
-    private bool shooting , reloading;
+    private bool shooting , reloading = false;
     public int bulletsLeft;
     private ScCooldown shootCd = new ScCooldown();
     
@@ -24,6 +24,11 @@ public class ScWeapon : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         shootCd.ResetCooldown();
+    }
+
+    private void Start()
+    {
+        Invoke("WaitForDestroy", 5f);
     }
 
     private void TryShoot()
@@ -41,14 +46,14 @@ public class ScWeapon : MonoBehaviour
         {
             TryShoot();
         }
+        
     }
 
     private void Shoot()
     {
         shootCd.StartCooldown(shootTime);
         Invoke("TryShoot", shootTime);
-        bulletsLeft--;
-
+        //bulletsLeft--;                                                    ACTIVAR SACAR BALAS
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
@@ -64,12 +69,18 @@ public class ScWeapon : MonoBehaviour
         Vector3 direction = targetpoint - atackPoint.position;
 
         GameObject currentBullet = Instantiate(bullet, atackPoint.position, Quaternion.identity);
-        currentBullet.transform.forward = direction.normalized;
-        currentBullet.GetComponent<Rigidbody>().AddForce(direction.normalized * 100, ForceMode.Impulse);
+        currentBullet.transform.up = direction.normalized;
+        currentBullet.GetComponent<ScProjectile>().owner = this.GetComponent<ScEntity>();
+
     }
 
     public void Reload()
     {
 
+    }
+
+    public void WaitForDestroy()
+    {
+        Destroy(gameObject);
     }
 }
