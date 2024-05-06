@@ -117,7 +117,7 @@ public class ExplodingMutant : MonoBehaviour
             }
         }
 
-        Invoke("WaitForDestroy", 3);
+        Invoke("WaitForDestroy", 2);
 
 
         //Funciona pero tambien golpea a traves de las paredes - OBSOLETO

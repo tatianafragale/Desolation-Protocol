@@ -183,7 +183,7 @@ MonoBehaviour:
   health: 100
   level: 0
   experience: 0
-  Team: 
+  Team: Player
   totaljumps: 1
   movement: {x: 0, y: 0, z: 0}
   Velocity: 0

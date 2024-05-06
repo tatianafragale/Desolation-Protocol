@@ -10,6 +10,8 @@ public class Mob_Unoptimized : MonoBehaviour
     [SerializeField] private LayerMask WhatIsPlayer;
     [SerializeField] private float _attackRange;
     [SerializeField] private float _healthPoints;
+
+
     private bool _playerInAttackRange;
 
     private Animator _anim;
@@ -19,9 +21,9 @@ public class Mob_Unoptimized : MonoBehaviour
     //Attack Variables
     private bool _alreadyAttacked = false;
     [SerializeField] private float _timeBetweenAttacks;
-    [SerializeField] private int _maxAttackDMG;
-    [SerializeField] private int _minAttackDMG;
-    [SerializeField] private float _dmgRange;
+    [SerializeField] private Collider _claws;
+    //[SerializeField] private int _maxAttackDMG;
+    //[SerializeField] private int _minAttackDMG;
 
     private bool _enemyInHitDistance;
 
@@ -53,16 +55,17 @@ public class Mob_Unoptimized : MonoBehaviour
     private void Attack()
     {
         _agent.SetDestination(transform.position); // No se si en este caso queremos frenarlo. Tal vez haga que nunca le pegue
-        transform.LookAt(Player);
+        //transform.LookAt(Player);
 
         if (!_alreadyAttacked)
         {
             _anim.SetTrigger("Attack");
             _alreadyAttacked = true;
+            _claws.enabled = true;
             Invoke(nameof(ResetAttack), _timeBetweenAttacks);
         }
     }
-    private void DamagePoint()
+    /*private void DamagePoint()
     {
         _enemyInHitDistance = Physics.CheckSphere(transform.position, _dmgRange, WhatIsPlayer);
 
@@ -70,6 +73,11 @@ public class Mob_Unoptimized : MonoBehaviour
         {
             Player.GetComponent<ScEntity>().TakeDamage(Random.Range(_minAttackDMG, _maxAttackDMG));
         }
+    }*/
+
+    private void DisableClaws()
+    {
+        _claws.enabled = false;
     }
 
     private void ResetAttack()
