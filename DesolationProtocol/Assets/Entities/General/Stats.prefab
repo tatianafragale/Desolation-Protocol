@@ -52,7 +52,7 @@ MonoBehaviour:
       armor: 10
       damage: 25
       attackSpeed: 1
-      movementSpeed: 18
+      movementSpeed: 30
       jumpForce: 1
       critPercent: 1
       critMultiplier: 1.2

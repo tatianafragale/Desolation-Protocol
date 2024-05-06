@@ -44,12 +44,12 @@ public class ScTurret : MonoBehaviour
                 {
                     if (Hit.transform == Target.transform) //si lo ve hacemos que apunte al jugador
                     {
-                        print("Te veo");
+                        //print("Te veo");
                         Aim(DirectionToPlayer);
                     }
                     else
                     {
-                        print("No te veo");
+                        //print("No te veo");
                         Idle();
                     }
                 }
@@ -57,7 +57,7 @@ public class ScTurret : MonoBehaviour
             }
             else
             {
-                print("Player out of sight");
+                //print("Player out of sight");
                 Idle();
             }
         }
@@ -82,7 +82,7 @@ public class ScTurret : MonoBehaviour
         {
             if (Hit.transform == Target.transform) 
             {
-                print("Te disparo");
+                //print("Te disparo");
                 Fire();
 
             }
@@ -108,7 +108,7 @@ public class ScTurret : MonoBehaviour
     {
         if(TurretOn == true)
         {
-            print("Me apague");
+            //print("Me apague");
             TurretOn = false;
             Rotator.Rotate(40,0,0);
         }
