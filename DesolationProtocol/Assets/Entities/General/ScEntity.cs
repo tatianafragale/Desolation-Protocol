@@ -34,6 +34,8 @@ public class ScEntity : MonoBehaviour
 
     public ScAbility[] abilities;
 
+    private bool _isDead = false;
+
     //effects
     public bool silenced = false;
 
@@ -86,13 +88,19 @@ public class ScEntity : MonoBehaviour
         //Validate Death
         if (health <= 0)
         {
-            Die();
+            if (!_isDead)
+            {
+                _isDead = true;
+                Die();
+            }
+            else { }
+           
         }
     }
 
     private void Die()
     {
-
+        _anim.SetTrigger("Death");
     }
 
     public void Heal(float heal)

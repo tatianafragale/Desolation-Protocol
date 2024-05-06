@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2233584336945616685, guid: 611a087c9d1aa2f459e8c50a2e75a0d4, type: 3}
-  Player: {fileID: 0}
+  Target: {fileID: 0}
   RotationSpeed: 15
   Range: 10
   RangeOfSight: 11
