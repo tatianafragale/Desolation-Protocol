@@ -15,12 +15,6 @@ public class ScSilencer : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        DetectDistance();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -31,6 +25,7 @@ public class ScSilencer : MonoBehaviour
     {
         if (Vector3.Distance(chase._target.position, transform.position) < SilenceDistance) 
         {
+            chase._target.GetComponentInParent<ScEntity>().silenced = true;
 
             if (Vector3.Distance(chase._target.position, transform.position) < walkDistance)
             {
@@ -43,7 +38,18 @@ public class ScSilencer : MonoBehaviour
                 _anim.SetBool("InRange", false);
             }
         }
+        else
+        {
+            chase._target.GetComponentInParent<ScEntity>().silenced = false;
+        }
     }
 
-    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, walkDistance);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, SilenceDistance);
+    }
 }

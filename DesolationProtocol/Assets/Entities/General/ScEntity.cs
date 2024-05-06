@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
@@ -38,6 +39,10 @@ public class ScEntity : MonoBehaviour
 
     //effects
     public bool silenced = false;
+
+    public UnityEvent OnTakingDmg;
+    public UnityEvent OnHeal;
+    public UnityEvent OnDeath;
 
     private void Awake()
     {
@@ -76,6 +81,7 @@ public class ScEntity : MonoBehaviour
     public void TakeDamage(float incomingDamage, float incomingPenLinear = 0, float incomingPenPerc = 0)
     {
         //Deal Damage
+        OnTakingDmg.Invoke();
         float finalArmor = (Stats.armor * (1 - incomingPenPerc) - incomingPenLinear); //Define Final Armor
         if (finalArmor >= 0)
         {
@@ -101,10 +107,12 @@ public class ScEntity : MonoBehaviour
     private void Die()
     {
         _anim.SetTrigger("Death");
+        OnDeath.Invoke();
     }
 
     public void Heal(float heal)
     {
+        OnHeal.Invoke();
         health += heal;
         if (health > Stats.maxHealth) health = Stats.maxHealth;
     }
@@ -142,7 +150,7 @@ public class ScEntity : MonoBehaviour
 
     public void TryAbility(int _selected)
     {
-        if (silenced)
+        if (!silenced)
         {
             if (_selected < abilities.Length)
             {

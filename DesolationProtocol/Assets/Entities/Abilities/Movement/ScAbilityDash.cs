@@ -14,5 +14,6 @@ public class ScAbilityDash : ScAbility
         Rigidbody _rigidbody = entity.GetComponent<Rigidbody>();
         _rigidbody.velocity = new Vector3(0, 0, 0);
         _rigidbody.AddForce(_rigidbody.transform.forward * dashSpeed * 1000);
+        Debug.Log("aaa");
     }
 }

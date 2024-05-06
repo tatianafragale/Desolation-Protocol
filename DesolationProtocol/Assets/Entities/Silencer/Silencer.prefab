@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkDistance: 20
-  SilenceDistance: 40
+  SilenceDistance: 30
 --- !u!114 &7634127929778258206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bdc23ee78b56fd48b3522d3ac66f755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkStats: {fileID: 0}
+  linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
   entityName: Silencer
   Team: Zombie
   Stats:

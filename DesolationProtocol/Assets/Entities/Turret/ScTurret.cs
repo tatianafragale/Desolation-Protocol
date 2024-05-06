@@ -28,15 +28,15 @@ public class ScTurret : MonoBehaviour
     {
         _counter += Time.deltaTime;
         
-        bool PlayerInSight = Vector3.Distance(transform.position, Target.position) < RangeOfSight;
         //print(PlayerInSight);
         if (TurretOn == true)
         {
-            if (PlayerInSight == true )   //chequeamos si ve o no al jugador
+            if (Vector3.Distance(transform.position, Target.position) < RangeOfSight)   //chequeamos si ve o no al jugador
             {
                 //print("Player in sight");
-                Vector3 DirectionToPlayer = (Target.position - Rotator.position).normalized;
+                Vector3 DirectionToPlayer = (Target.position - Rotator.position);
                 DirectionToPlayer.y = 0;
+                DirectionToPlayer = DirectionToPlayer.normalized;
 
                 Debug.DrawRay(Rotator.position, DirectionToPlayer * RangeOfSight, Color.green);
 

@@ -5,38 +5,24 @@ using UnityEngine.AI; // Importante para el navmesh
 
 public class ExplodingMutant : MonoBehaviour
 {
-
-    [SerializeField] private NavMeshAgent _agent;
-    public Transform Player;
-    public Transform Entity;
-    public LayerMask WhatIsPlayer;
+    private ScEntity _entity;
+    private ScEnemyChase _enemyChase;
     private bool _isExploding = false;
-    [SerializeField] private float _attackRange;
-    [SerializeField] private float _healthPoints;
-    [SerializeField] private bool _playerInAttackRange;
+
+    //variables
+    [SerializeField] private float _explosionRange;
+    [SerializeField] private bool doRaycast = true;
+    [SerializeField] private GameObject FatMutant, Explosion;
+    [SerializeField] private LayerMask PlayerLayer, DmgLayer, BlockLayer;
 
     private Animator _anim; // TENDRIA SENTIDO QUE ESTO SALGA DIRECTO DESDE ENTITY
 
-    // VARIABLES PARA LA EXPLOSION
-    public GameObject FatMutant, Explosion;
-
     private AudioSource _audioSource;
-
-    [SerializeField] private float _explosionRange;
-    [SerializeField] private int _maxHits = 30;
-    [SerializeField] private int _maxDamage = 71;
-    [SerializeField] private int _minDamage = 30;
-
-    public LayerMask HitLayer;
-    public LayerMask BlockExplosionsLayer;
-
-    private Collider[] _entitiesHit;
 
     private void Awake()
     {
-        Player = FindObjectOfType<ScPlayer>().transform;
-        Entity = FindObjectOfType<ScEntity>().transform;
-        _agent = GetComponent<NavMeshAgent>();
+        _entity = GetComponent<ScEntity>();
+        _enemyChase = GetComponent<ScEnemyChase>();
 
         _anim = GetComponentInChildren<Animator>();
 
@@ -45,44 +31,25 @@ public class ExplodingMutant : MonoBehaviour
 
         _audioSource = GetComponent<AudioSource>();
 
-        _entitiesHit = new Collider[_maxHits];
     }
 
     private void Update()
     {
         //Check if player is in attack range
 
-        _playerInAttackRange = Physics.CheckSphere(transform.position, _attackRange, WhatIsPlayer);
-
-        if (!_playerInAttackRange && !_isExploding) ChasePlayer();
-        if (_playerInAttackRange) ExplodingAttack();
-
-    }
-
-    private void ChasePlayer()
-    {
-        _agent.SetDestination(Player.position);
-    }
-
-    private void ExplodingAttack()
-    {
-        _agent.SetDestination(transform.position);  // lo freno
-
-        _isExploding = true;  // uso este bool para que continue explotando aunque el jugador se escape
-
-        _anim.SetTrigger("ExplodeAttack");
-
-    }
-
-    public void TakeDamage(float incomingDamage) // ESTO EN REALIDAD HAY QUE HACERLO CON EL SCRIPT DE ENTITY
-    {
-
-        _healthPoints -= incomingDamage;
-
-        //Validate Death
-        if (_healthPoints <= 0)
+        bool _playerInAttackRange = Physics.CheckSphere(transform.position, _explosionRange, PlayerLayer);
+        if (!_isExploding)
         {
-            Explode();
+            if (!_playerInAttackRange)
+            {
+                _enemyChase.KeepMoving();
+            }
+            else
+            {
+                _enemyChase.Stop();
+                _isExploding = true;
+                _anim.SetTrigger("ExplodeAttack");
+            }
         }
     }
 
@@ -95,7 +62,7 @@ public class ExplodingMutant : MonoBehaviour
 
 
         // No Pega a traves de las paredes
-
+        /*
         Ray _explosionRay = new Ray(transform.position, Entity.position);
         
         if (Physics.Raycast(_explosionRay, out RaycastHit hit))
@@ -115,31 +82,48 @@ public class ExplodingMutant : MonoBehaviour
                     }
                 }
             }
-        }
-
-        Invoke("WaitForDestroy", 2);
+        }*/
 
 
-        //Funciona pero tambien golpea a traves de las paredes - OBSOLETO
-        /*
+
+        //Funciona pero tambien golpea a traves de las paredes - OBSOLETO, hola soy casa lo hice funcionar de mejor manera
+
         Collider[] entitiesInRange = Physics.OverlapSphere(transform.position, _explosionRange);
         foreach (Collider entity in entitiesInRange)
         {
-            if (entity.GetComponent<ScEntity>() != null)
+            if (entity.GetComponent<ScEntity>() != null && entity.GetComponent<ScEntity>() != _entity)
             {
-                entity.GetComponent<ScEntity>().TakeDamage(Random.Range(_minDamage, _maxDamage)); // Deberiamos agregar ragdoll al script de entity cuando se comen la explosion
-            }
+                ScEntity LocalEntity = entity.GetComponent<ScEntity>();
+                if (doRaycast)
+                {
+                    Debug.DrawRay(transform.position, (LocalEntity.transform.position - transform.position).normalized * _explosionRange, Color.green);
 
+                    Ray ray = new Ray(transform.position, (LocalEntity.transform.position - transform.position).normalized * _explosionRange);
+                    RaycastHit DmgHit;
+                    Physics.Raycast(ray, out DmgHit, _explosionRange, DmgLayer);
+                    RaycastHit BlockHit;
+                    Physics.Raycast(ray, out BlockHit, _explosionRange, BlockLayer);
+
+                    if (DmgHit.distance < BlockHit.distance || !BlockHit.collider)
+                    {
+                        LocalEntity.TakeDamage(Random.Range(_entity.Stats.damage, _entity.Stats.damage * _entity.Stats.critMultiplier));
+                    }
+                }
+                else
+                {
+                    LocalEntity.TakeDamage(Random.Range(_entity.Stats.damage, _entity.Stats.damage * _entity.Stats.critMultiplier));
+                }
+            }
         }
-        */
+        Invoke("WaitForDestroy", 2);
     }
 
 
-    private void WaitForDestroy ()
+    private void WaitForDestroy()
     {
         Destroy(gameObject);
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

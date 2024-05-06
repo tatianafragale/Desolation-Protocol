@@ -98,6 +98,7 @@ public class ScPlayer : MonoBehaviour
     private void TryAbility(InputAction.CallbackContext CallbackContext, int Selected)
     {
         if (CallbackContext.performed) _entity.TryAbility(Selected);
+        
     }
 
     public void TryAbility0(InputAction.CallbackContext CallbackContext)

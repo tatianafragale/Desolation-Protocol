@@ -25,9 +25,16 @@ public class ScEnemyChase : MonoBehaviour
 
     private void Update()
     {
-        if (_target && _active)
+        if (_active)
         {
-            _agent.SetDestination(_target.position);
+            if (_target != null)
+            {
+                _target = FindObjectOfType<ScPlayer>().transform;
+            }
+            if (_target)
+            {
+                _agent.SetDestination(_target.position);
+            }
         }
     }
 
