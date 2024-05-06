@@ -13,11 +13,14 @@ public class Bullet : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        Invoke("WaitForDestroy", 5f);
+    }
+
     void Update()
     {
         transform.position += transform.forward * Speed * Time.deltaTime;
-
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,4 +33,8 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void WaitForDestroy()
+    {
+        Destroy(gameObject);
+    }
 }

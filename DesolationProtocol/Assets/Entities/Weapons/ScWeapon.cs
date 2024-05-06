@@ -26,11 +26,6 @@ public class ScWeapon : MonoBehaviour
         shootCd.ResetCooldown();
     }
 
-    private void Start()
-    {
-        Invoke("WaitForDestroy", 5f);
-    }
-
     private void TryShoot()
     {
         if (shootCd.IsReady && shooting && !reloading && bulletsLeft > 0)
@@ -77,10 +72,5 @@ public class ScWeapon : MonoBehaviour
     public void Reload()
     {
 
-    }
-
-    public void WaitForDestroy()
-    {
-        Destroy(gameObject);
     }
 }
