@@ -15,6 +15,7 @@ public class ScProjectile : MonoBehaviour
     private void Start()
     {
         _rigidbody.velocity = transform.forward * 5;
+        Invoke("WaitForDestroy", 5f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,5 +31,9 @@ public class ScProjectile : MonoBehaviour
                 otherEntity.TakeDamage(10f);
             }
         }
+    }
+    public void WaitForDestroy()
+    {
+        Destroy(gameObject);
     }
 }

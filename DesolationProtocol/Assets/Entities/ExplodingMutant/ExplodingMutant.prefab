@@ -640,7 +640,7 @@ Transform:
   m_GameObject: {fileID: 3746106336242127684}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.48, y: 5.5, z: 6.07}
+  m_LocalPosition: {x: 36.55, y: 5.5, z: -6.42}
   m_LocalScale: {x: 1.3359, y: 1.3359, z: 1.3359}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -685,6 +685,27 @@ MonoBehaviour:
   OnLandCollider: {fileID: 0}
   abilities: []
   silenced: 0
+  OnTakingDmg:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 408253424090369385}
+        m_TargetAssemblyTypeName: ExplodingMutant, Assembly-CSharp
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &408253424090369385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,21 +718,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961af4b370b5b514787e9a6d88fb3e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosionRange: 5
   doRaycast: 1
-  Player: {fileID: 0}
-  Entity: {fileID: 0}
-  WhatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _attackRange: 1.25
-  _healthPoints: 10
-  _playerInAttackRange: 0
   FatMutant: {fileID: 5493894508233848889}
   Explosion: {fileID: 4697224650367693064}
-  _explosionRange: 5
-  Layer:
+  PlayerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  DmgLayer:
+    serializedVersion: 2
+    m_Bits: 896
+  BlockLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &7038814136623598959
 MonoBehaviour:
   m_ObjectHideFlags: 0
