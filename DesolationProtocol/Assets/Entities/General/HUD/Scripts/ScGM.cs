@@ -31,12 +31,12 @@ public class ScGM : MonoBehaviour
     {
         AmmoCounter.text = _Ammo.ToString();
         WaveCounter.text = "Oleada " + _Wave.ToString();
-        if (Input.GetMouseButtonDown(0) && !IsFiring && _Ammo > 0)
+        /*if (Input.GetMouseButtonDown(0) && !IsFiring && _Ammo > 0)
         {
             IsFiring = true;
             _Ammo--;
             IsFiring=false;
-        }
+        }*/
     }
 
     public void WaveIncrease()
