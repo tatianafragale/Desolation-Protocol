@@ -15,8 +15,6 @@ public class ExplodingMutant : MonoBehaviour
     [SerializeField] private float _healthPoints;
     [SerializeField] private bool _playerInAttackRange;
 
-    [SerializeField] private int _explosionFrame = 111;
-
     private Animator _anim; // TENDRIA SENTIDO QUE ESTO SALGA DIRECTO DESDE ENTITY
 
     // VARIABLES PARA LA EXPLOSION
@@ -114,12 +112,12 @@ public class ExplodingMutant : MonoBehaviour
                     if (!Physics.Raycast(hit.point, (_entitiesHit[i].transform.position - hit.point).normalized, distance, BlockExplosionsLayer.value))
                     {
                         _entitiesHit[i].GetComponent<ScEntity>().TakeDamage(Random.Range(_minDamage, _maxDamage));
-                        Debug.Log("Take Damage");
                     }
                 }
             }
         }
-        
+
+        Invoke("WaitForDestroy", 2);
 
 
         //Funciona pero tambien golpea a traves de las paredes - OBSOLETO
@@ -137,6 +135,11 @@ public class ExplodingMutant : MonoBehaviour
     }
 
 
+    private void WaitForDestroy ()
+    {
+        Destroy(gameObject);
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
