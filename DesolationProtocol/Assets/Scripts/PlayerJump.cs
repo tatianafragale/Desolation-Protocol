@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScEntityJump : MonoBehaviour
+public class PlayerJump : MonoBehaviour
 {
     private ScEntity _entity;
     private int i;
