@@ -42,11 +42,11 @@ public class ScPlayer : MonoBehaviour
             {
                 if (_entity.landed)
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 4, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 100, ForceMode.Acceleration);
                 }
                 else
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 4 * _entity.airControl, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 100 * _entity.airControl, ForceMode.Acceleration);
                 }
             }
             else
