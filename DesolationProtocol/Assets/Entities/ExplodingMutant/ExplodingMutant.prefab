@@ -663,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
   entityName: Explosive
-  Team: Zombie
+  Team: Enemy
   Stats:
     maxHealth: 100
     regeneration: 0

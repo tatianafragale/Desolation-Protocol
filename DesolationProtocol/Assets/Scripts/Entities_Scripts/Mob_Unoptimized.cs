@@ -9,8 +9,6 @@ public class Mob_Unoptimized : MonoBehaviour
     [SerializeField] private Transform Player;
     [SerializeField] private LayerMask WhatIsPlayer;
     [SerializeField] private float _attackRange;
-    [SerializeField] private float _healthPoints;
-
 
     private bool _playerInAttackRange;
 

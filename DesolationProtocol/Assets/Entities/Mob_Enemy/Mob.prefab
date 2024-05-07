@@ -2220,11 +2220,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7584975286653726668}
+  - component: {fileID: 5146489284066494975}
+  - component: {fileID: 4828728588437162370}
   - component: {fileID: 4585528647848392118}
   - component: {fileID: 3094428591669074729}
   - component: {fileID: 3909560039975632294}
   - component: {fileID: 3785431638723831642}
-  - component: {fileID: 4828728588437162370}
   m_Layer: 8
   m_Name: Mob
   m_TagString: Untagged
@@ -2249,6 +2250,72 @@ Transform:
   - {fileID: 2103852918203549035}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5146489284066494975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064158225660966262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdc23ee78b56fd48b3522d3ac66f755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
+  entityName: Mob
+  Team: Enemy
+  Stats:
+    maxHealth: 100
+    regeneration: 0
+    armor: 10
+    damage: 10
+    attackSpeed: 1
+    movementSpeed: 1
+    jumpForce: 1
+    critPercent: 1
+    critMultiplier: 1.2
+    cooldowns: 1
+  health: 100
+  level: 0
+  experience: 0
+  totaljumps: 1
+  airControl: 0.8
+  Velocity: 0
+  landed: 1
+  OnLandCollider: {fileID: 0}
+  abilities: []
+  Manager: {fileID: 0}
+  silenced: 0
+  OnTakingDmg:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4828728588437162370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064158225660966262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371ecc0da31b4924aa115aafe5b212aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: 3094428591669074729}
+  Player: {fileID: 0}
+  WhatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackRange: 1.5
+  _timeBetweenAttacks: 2
+  _claws: {fileID: 4026396332528554069}
 --- !u!95 &4585528647848392118
 Animator:
   serializedVersion: 5
@@ -2342,27 +2409,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4828728588437162370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064158225660966262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 371ecc0da31b4924aa115aafe5b212aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 3094428591669074729}
-  Player: {fileID: 0}
-  WhatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _attackRange: 1.5
-  _healthPoints: 30
-  _timeBetweenAttacks: 2
-  _claws: {fileID: 4026396332528554069}
 --- !u!1 &7743581155855327239
 GameObject:
   m_ObjectHideFlags: 0

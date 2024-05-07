@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
   entityName: Silencer
-  Team: Zombie
+  Team: Enemy
   Stats:
     maxHealth: 100
     regeneration: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   landed: 1
   OnLandCollider: {fileID: 0}
   abilities: []
+  Manager: {fileID: 0}
   silenced: 0
   OnTakingDmg:
     m_PersistentCalls:
@@ -231,6 +232,7 @@ MonoBehaviour:
   _agent: {fileID: 4528735540242238148}
   _target: {fileID: 0}
   _active: 1
+  rotateidle: 0
 --- !u!195 &4528735540242238148
 NavMeshAgent:
   m_ObjectHideFlags: 0

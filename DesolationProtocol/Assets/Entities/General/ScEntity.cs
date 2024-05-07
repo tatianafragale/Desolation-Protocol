@@ -119,6 +119,10 @@ public class ScEntity : MonoBehaviour
     {
         _anim.SetTrigger("Death");
         OnDeath.Invoke();
+        if (Team == "Enemy" && entityName != "Explosive")
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Heal(float heal)

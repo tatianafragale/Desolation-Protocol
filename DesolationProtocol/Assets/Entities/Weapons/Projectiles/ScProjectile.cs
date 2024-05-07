@@ -31,6 +31,7 @@ public class ScProjectile : MonoBehaviour
                 otherEntity.TakeDamage(10f);
             }
         }
+        Destroy(gameObject);
     }
     public void WaitForDestroy()
     {
