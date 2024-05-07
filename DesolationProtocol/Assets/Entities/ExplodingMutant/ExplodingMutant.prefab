@@ -684,6 +684,7 @@ MonoBehaviour:
   landed: 1
   OnLandCollider: {fileID: 0}
   abilities: []
+  Manager: {fileID: 0}
   silenced: 0
   OnTakingDmg:
     m_PersistentCalls:
@@ -746,6 +747,7 @@ MonoBehaviour:
   _agent: {fileID: 0}
   _target: {fileID: 0}
   _active: 1
+  rotateidle: 0
 --- !u!54 &4343425577979544583
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -754,7 +756,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3746106336242127684}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -792,10 +794,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1.1
+  m_Radius: 0.37
+  m_Height: 1.4
   m_Direction: 1
-  m_Center: {x: -0.0000002980232, y: 1.05, z: -0.1}
+  m_Center: {x: -0.0000002980232, y: 0.7, z: -0.1}
 --- !u!195 &6961921930915876864
 NavMeshAgent:
   m_ObjectHideFlags: 0
