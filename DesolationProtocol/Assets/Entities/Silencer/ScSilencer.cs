@@ -18,12 +18,7 @@ public class ScSilencer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectDistance();
-    }
-
-    private void DetectDistance()
-    {
-        if (Vector3.Distance(chase._target.position, transform.position) < SilenceDistance) 
+        if (Vector3.Distance(chase._target.position, transform.position) < SilenceDistance)
         {
             chase._target.GetComponentInParent<ScEntity>().silenced = true;
 

@@ -9,6 +9,7 @@ public class ScEnemyChase : MonoBehaviour
     public Transform _target;
     private ScEntity _entity;
     public bool _active = true;
+    public bool rotateidle = false;
 
     private void Awake()
     {
@@ -25,15 +26,16 @@ public class ScEnemyChase : MonoBehaviour
 
     private void Update()
     {
+        if (_target != null)
+        {
+            _target = FindObjectOfType<ScPlayer>().transform;
+        }
         if (_active)
         {
-            if (_target != null)
-            {
-                _target = FindObjectOfType<ScPlayer>().transform;
-            }
             if (_target)
             {
                 _agent.SetDestination(_target.position);
+
             }
         }
     }

@@ -49,13 +49,10 @@ public class ScWeapon : MonoBehaviour
         shootCd.StartCooldown(shootTime);
         Invoke("TryShoot", shootTime);
         //bulletsLeft--;                                                    ACTIVAR SACAR BALAS
+        
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
-        
-
         Vector3 targetpoint;
-
-        
 
         if (Physics.Raycast(ray,out RaycastHit hit))
         {
@@ -68,9 +65,7 @@ public class ScWeapon : MonoBehaviour
         Vector3 direction = atackPoint.position - targetpoint;
 
         Debug.DrawRay(targetpoint, targetpoint - atackPoint.position);
-
-        GameObject currentBullet = Instantiate(bullet, atackPoint.position, Quaternion.identity);
-        currentBullet.transform.up = direction.normalized;
+        GameObject currentBullet = Instantiate(bullet, atackPoint.position, Quaternion.LookRotation(targetpoint - atackPoint.position));
         currentBullet.GetComponent<ScProjectile>().owner = this.GetComponent<ScEntity>();
 
     }

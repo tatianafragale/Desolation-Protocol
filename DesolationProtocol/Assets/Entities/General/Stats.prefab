@@ -91,7 +91,7 @@ MonoBehaviour:
       critPercent: 0.1
       critMultiplier: 0.02
       cooldowns: 0.01
-  - title: Shield
+  - title: Tank
     statsBase:
       maxHealth: 100
       regeneration: 0
