@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 572758081152229405}
   m_Layer: 0
-  m_Name: BM_Door
+  m_Name: Bm_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,9 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4836119973798026955}
-  - {fileID: 4836119973798026959}
+  - {fileID: 4724526657142814183}
   - {fileID: 6503244581393541112}
-  - {fileID: 1503088053889290371}
+  - {fileID: 1503088053889157634}
   - {fileID: 2224844370758097939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,7 +105,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ee0b8dea310724e9e3e84cab338d7a, type: 3}
---- !u!4 &1503088053889290371 stripped
+--- !u!4 &1503088053889157634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 74ee0b8dea310724e9e3e84cab338d7a, type: 3}
   m_PrefabInstance: {fileID: 1503088053889290370}
@@ -253,7 +253,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ee0b8dea310724e9e3e84cab338d7a, type: 3}
---- !u!4 &4836119973798026959 stripped
+--- !u!4 &4724526657142814183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 74ee0b8dea310724e9e3e84cab338d7a, type: 3}
   m_PrefabInstance: {fileID: 4724526657142681447}
