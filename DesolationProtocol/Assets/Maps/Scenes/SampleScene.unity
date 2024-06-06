@@ -2075,8 +2075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772b7b2bedf057e4bb689f1a1b42a698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemigos:
+  Enemies:
   - {fileID: 7064158225660966262, guid: fd62567661810e3459e7b645efaf39e1, type: 3}
+  - {fileID: 3746106336242127684, guid: efe11b3eb2c509b4bbc3183ea1280540, type: 3}
+  - {fileID: 602292096242277249, guid: 82a74d8b956d3c84695cc5659f066485, type: 3}
   PositionmMin: {fileID: 1769807428}
   PositionMax: {fileID: 585623012}
 --- !u!4 &205968404
