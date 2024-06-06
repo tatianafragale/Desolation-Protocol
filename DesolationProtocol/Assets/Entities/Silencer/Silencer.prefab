@@ -172,6 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkDistance: 20
   SilenceDistance: 30
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!114 &7634127929778258206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +212,7 @@ MonoBehaviour:
   abilities: []
   Manager: {fileID: 0}
   silenced: 0
+  silencers: 0
   OnTakingDmg:
     m_PersistentCalls:
       m_Calls: []

@@ -39,8 +39,15 @@ public class ScSilencer : MonoBehaviour
         ScEntity otherEntity = other.GetComponent<ScEntity>();
         if (otherEntity && Entity.Team != otherEntity.Team)
         {
-            otherEntity.silenced = action;
-            print(action);
+            if (action)
+            {
+                otherEntity.silencers++;
+            }
+            else
+            {
+                otherEntity.silencers--;
+            }
+            
         }
     }
 
@@ -60,6 +67,8 @@ public class ScSilencer : MonoBehaviour
         foreach (Collider collider in hitColliders)
         {
             Silence(collider, false);
+            print("muriosilencer");
         }
+        
     }
 }
