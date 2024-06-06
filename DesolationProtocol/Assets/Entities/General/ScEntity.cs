@@ -40,7 +40,7 @@ public class ScEntity : MonoBehaviour
     [SerializeField] private ScGM Manager;
 
     //effects
-    public bool silenced = false;
+    public int silencers = 0;
 
     public UnityEvent OnTakingDmg;
     public UnityEvent OnHeal;
@@ -169,7 +169,7 @@ public class ScEntity : MonoBehaviour
 
     public void TryAbility(int _selected)
     {
-        if (!silenced)
+        if (silencers == 0)
         {
             if (_selected < abilities.Length)
             {
@@ -189,7 +189,7 @@ public class ScEntity : MonoBehaviour
         }
         else
         {
-            //mensaje silenciado
+            print("Silenciado");
         }
     }
 }

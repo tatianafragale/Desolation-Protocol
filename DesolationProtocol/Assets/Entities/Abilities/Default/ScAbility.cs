@@ -15,6 +15,10 @@ public class ScAbility : ScriptableObject
         {
             Activate(entity);
         }
+        else
+        {
+            Debug.Log("On CD Sound");
+        }
     }
 
     public virtual void Activate(ScEntity entity)
