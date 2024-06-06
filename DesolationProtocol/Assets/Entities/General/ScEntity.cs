@@ -169,7 +169,7 @@ public class ScEntity : MonoBehaviour
 
     public void TryAbility(int _selected)
     {
-        if (silencers != 0)
+        if (silencers == 0)
         {
             if (_selected < abilities.Length)
             {
