@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 182278, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
       propertyPath: m_Name
-      value: P_Floor_02 Variant
+      value: Floor_02
       objectReference: {fileID: 0}
     - target: {fileID: 453880, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,27 +52,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 64480290884483218, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1084994747702348, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 182278, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3101685093122858976}
+      addedObject: {fileID: 4072926017226197149}
   m_SourcePrefab: {fileID: 100100000, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
---- !u!1 &8100720895574683500 stripped
+--- !u!1 &8099812372527971110 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1084994747702348, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
+  m_CorrespondingSourceObject: {fileID: 182278, guid: 695e9c39c231cfa41a135e68073a9772, type: 3}
   m_PrefabInstance: {fileID: 8099812372527788832}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &3101685093122858976
+--- !u!65 &4072926017226197149
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8100720895574683500}
+  m_GameObject: {fileID: 8099812372527971110}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -85,5 +84,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.03, z: 3}
+  m_Size: {x: 3, y: 0.01, z: 3}
   m_Center: {x: 1.5, y: 0, z: -1.5}
