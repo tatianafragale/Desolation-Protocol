@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ScSilencer : MonoBehaviour
 {
     private ScEnemyChase chase;
+    private ScEntity Entity;
     [SerializeField] private float walkDistance = 20f;
-    [SerializeField] private float SilenceDistance = 40f;
+    [SerializeField] public float SilenceDistance = 40f;
     private Animator _anim;
+    private LayerMask layerMask;
 
     private void Awake()
     {
+        Entity = GetComponent<ScEntity>();
         chase = GetComponent<ScEnemyChase>();
         _anim = GetComponent<Animator>();
     }
@@ -18,24 +22,25 @@ public class ScSilencer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(chase._target.position, transform.position) < SilenceDistance)
+        if (Vector3.Distance(chase._target.position, transform.position) < walkDistance)
         {
-            chase._target.GetComponentInParent<ScEntity>().silenced = true;
-
-            if (Vector3.Distance(chase._target.position, transform.position) < walkDistance)
-            {
-                chase.Stop();
-                _anim.SetBool("InRange", true);
-            }
-            else
-            {
-                chase.KeepMoving();
-                _anim.SetBool("InRange", false);
-            }
+            chase.Stop();
+            _anim.SetBool("InRange", true);
         }
         else
         {
-            chase._target.GetComponentInParent<ScEntity>().silenced = false;
+            chase.KeepMoving();
+            _anim.SetBool("InRange", false);
+        }
+    }
+
+    public void Silence(Collider other, bool action)
+    {
+        ScEntity otherEntity = other.GetComponent<ScEntity>();
+        if (otherEntity && Entity.Team != otherEntity.Team)
+        {
+            otherEntity.silenced = action;
+            print(action);
         }
     }
 
@@ -46,5 +51,15 @@ public class ScSilencer : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, SilenceDistance);
+    }
+
+    private void OnDestroy()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SilenceDistance, layerMask);
+
+        foreach (Collider collider in hitColliders)
+        {
+            Silence(collider, false);
+        }
     }
 }

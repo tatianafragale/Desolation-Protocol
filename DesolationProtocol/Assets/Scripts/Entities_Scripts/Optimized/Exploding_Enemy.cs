@@ -12,7 +12,6 @@ public class Exploding_Enemy : EnemyMovement
     private AudioSource _audioSource;
 
     [SerializeField] private float _explosionRange;
-    [SerializeField] private int _maxHits = 30;
     [SerializeField] private int _maxDamage = 71;
     [SerializeField] private int _minDamage = 30;
 

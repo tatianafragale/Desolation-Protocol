@@ -32,7 +32,7 @@ public class ScAbilityHolder : MonoBehaviour
             else
             {
                 print("No Ability");
-            }
+            }   
         }
         else
         {
