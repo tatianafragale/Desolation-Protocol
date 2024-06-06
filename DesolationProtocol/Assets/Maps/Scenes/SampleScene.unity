@@ -10544,6 +10544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Silencer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2995628397813824851, guid: 82a74d8b956d3c84695cc5659f066485, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 896
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -10,7 +10,7 @@ public class ScSilencer : MonoBehaviour
     [SerializeField] private float walkDistance = 20f;
     [SerializeField] public float SilenceDistance = 40f;
     private Animator _anim;
-    private LayerMask layerMask;
+    [SerializeField] private LayerMask layerMask;
 
     private void Awake()
     {
