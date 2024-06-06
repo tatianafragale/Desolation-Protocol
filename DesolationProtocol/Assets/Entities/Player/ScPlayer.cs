@@ -29,6 +29,11 @@ public class ScPlayer : MonoBehaviour
 
 
     }
+    void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
