@@ -67,8 +67,6 @@ public class ScSilencer : MonoBehaviour
         foreach (Collider collider in hitColliders)
         {
             Silence(collider, false);
-            print("muriosilencer");
         }
-        
     }
 }

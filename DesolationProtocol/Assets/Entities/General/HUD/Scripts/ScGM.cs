@@ -29,9 +29,10 @@ public class ScGM : MonoBehaviour
 
     void Update()
     {
+        /*
         AmmoCounter.text = _Ammo.ToString();
         WaveCounter.text = "Oleada " + _Wave.ToString();
-        /*if (Input.GetMouseButtonDown(0) && !IsFiring && _Ammo > 0)
+        if (Input.GetMouseButtonDown(0) && !IsFiring && _Ammo > 0)
         {
             IsFiring = true;
             _Ammo--;
@@ -45,6 +46,6 @@ public class ScGM : MonoBehaviour
     }
     public void CountHP()
     {
-        HpBar.value = _Entity.health / _Entity.Stats.maxHealth;
+        //HpBar.value = _Entity.health / _Entity.Stats.maxHealth;
     }
 }

@@ -37,7 +37,7 @@ public class ScEntity : MonoBehaviour
 
     private bool _isDead = false;
 
-    [SerializeField] private ScGM Manager;
+    [SerializeField] private ScHud Hud;
 
     //effects
     public int silencers = 0;
@@ -64,10 +64,10 @@ public class ScEntity : MonoBehaviour
         SetStats();
         _jumps = totaljumps;
         health = Stats.maxHealth;
-
-        if (Manager != null)
+        
+        if (Hud != null)
         {
-            Manager.CountHP();
+            Hud.CountHP();
         }
     }
 
@@ -107,11 +107,11 @@ public class ScEntity : MonoBehaviour
                 Die();
             }
             else { }
-           
+
         }
-        if (Manager != null)
+        if (Hud != null)
         {
-            Manager.CountHP();
+            Hud.CountHP();
         }
     }
 
@@ -130,9 +130,9 @@ public class ScEntity : MonoBehaviour
         OnHeal.Invoke();
         health += heal;
         if (health > Stats.maxHealth) health = Stats.maxHealth;
-        if (Manager != null)
+        if (Hud != null)
         {
-            Manager.CountHP();
+            Hud.CountHP();
         }
     }
 

@@ -17,6 +17,7 @@ public class ScPlayer : MonoBehaviour
     [SerializeField] private float sens = 1;
     private Animator _anim;
     public Vector3 movement;
+    [SerializeField] private ScHud Hud;
 
 
 
@@ -142,6 +143,12 @@ public class ScPlayer : MonoBehaviour
         TryAbility(CallbackContext, 3);
     }
 
-
+    public void Pause(InputAction.CallbackContext CallbackContext)
+    {
+        if (CallbackContext.performed)
+        {
+            Hud.TogglePause();
+        }
+    }
 
 }
