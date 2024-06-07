@@ -3959,7 +3959,6 @@ GameObject:
   - component: {fileID: 3475407571302328129}
   - component: {fileID: 6637574829142893667}
   - component: {fileID: 6708590247992180329}
-  - component: {fileID: 7763248478402167794}
   m_Layer: 7
   m_Name: PlayerAsset
   m_TagString: Player
@@ -3976,7 +3975,7 @@ Transform:
   m_GameObject: {fileID: 4131815228286559989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.59, y: 5.55, z: -5.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4023,7 +4022,7 @@ MonoBehaviour:
   abilities:
   - {fileID: 11400000, guid: 5da56ad299f823f4c962a5a484c9053b, type: 2}
   - {fileID: 11400000, guid: 871e927dee001ca4d954d991756f5e02, type: 2}
-  Manager: {fileID: 7763248478402167794}
+  Hud: {fileID: 0}
   silencers: 0
   OnTakingDmg:
     m_PersistentCalls:
@@ -4122,29 +4121,12 @@ MonoBehaviour:
   shootTime: 0.2
   reloadTime: 3
   automatic: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 897
   bulletsLeft: 0
   fpsCam: {fileID: 4847919556903865731}
   atackPoint: {fileID: 2600328065674887321}
---- !u!114 &7763248478402167794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131815228286559989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d083c1e2df8552647802b0b26ecb6423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Ammo: 0
-  _AmmoMax: 100
-  IsFiring: 0
-  AmmoCounter: {fileID: 0}
-  WaveCounter: {fileID: 0}
-  _Wave: 0
-  HpBar: {fileID: 0}
-  _Entity: {fileID: 993547378759256966}
 --- !u!1 &4161466188388703055
 GameObject:
   m_ObjectHideFlags: 0
@@ -5344,6 +5326,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2808edd0-72d9-4a40-8b2f-337384484496
     m_ActionName: Default/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5880024338143989813}
+        m_TargetAssemblyTypeName: ScPlayer, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bc3272c2-a619-4900-a682-207d93f2b156
+    m_ActionName: Default/Pause[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default
@@ -5363,6 +5361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sens: 2
   movement: {x: 0, y: 0, z: 0}
+  Hud: {fileID: 0}
 --- !u!1 &5352395027514564122
 GameObject:
   m_ObjectHideFlags: 0

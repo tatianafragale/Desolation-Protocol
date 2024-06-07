@@ -10,6 +10,7 @@ public class ScWeapon : MonoBehaviour
     [SerializeField] private float shootTime = 0.2f;
     [SerializeField] private float reloadTime = 3f;
     [SerializeField] private bool automatic;
+    [SerializeField] private LayerMask layerMask;
 
     //funcionamiento
     private bool shooting , reloading = false;
@@ -45,14 +46,13 @@ public class ScWeapon : MonoBehaviour
         {
             TryShoot();
         }
-        
     }
 
     private void Shoot()
     {
         shootCd.StartCooldown(shootTime);
         Invoke("TryShoot", shootTime);
-        //bulletsLeft--;                                                    ACTIVAR SACAR BALAS
+        //bulletsLeft--;
         
          if (_anim != null)
         {
@@ -63,7 +63,7 @@ public class ScWeapon : MonoBehaviour
 
         Vector3 targetpoint;
 
-        if (Physics.Raycast(ray,out RaycastHit hit))
+        if (Physics.Raycast(ray,out RaycastHit hit, 100, layerMask))
         {
             targetpoint = hit.point;
         }
@@ -77,10 +77,15 @@ public class ScWeapon : MonoBehaviour
         GameObject currentBullet = Instantiate(bullet, atackPoint.position, Quaternion.LookRotation(targetpoint - atackPoint.position));
         currentBullet.GetComponent<ScProjectile>().owner = this.GetComponent<ScEntity>();
 
+        if (bulletsLeft <= 0)
+        {
+            Reload();
+            Invoke("Reload", reloadTime);
+        }
     }
 
     public void Reload()
     {
-
+        bulletsLeft = magazineSize;
     }
 }

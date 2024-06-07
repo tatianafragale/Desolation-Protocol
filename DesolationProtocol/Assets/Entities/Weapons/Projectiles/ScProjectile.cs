@@ -14,27 +14,26 @@ public class ScProjectile : MonoBehaviour
 
     private void Start()
     {
-        _rigidbody.velocity = transform.forward * 5;
-        Invoke("WaitForDestroy", 5f);
+        _rigidbody.velocity = transform.forward * 100;
+        Destroy(gameObject, 5f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<ScEntity>(out ScEntity otherEntity))
         {
-            if (owner != null && owner.Team != otherEntity.Team)
+            if (owner != null)
             {
-                otherEntity.TakeDamage(owner.Stats.damage);
+                if (owner.Team != otherEntity.Team)
+                {
+                    otherEntity.TakeDamage(owner.Stats.damage);
+                }
             }
             else
             {
                 otherEntity.TakeDamage(10f);
             }
         }
-        Destroy(gameObject);
-    }
-    public void WaitForDestroy()
-    {
         Destroy(gameObject);
     }
 }

@@ -50,7 +50,7 @@ MonoBehaviour:
       maxHealth: 100
       regeneration: 0
       armor: 10
-      damage: 25
+      damage: 1000
       attackSpeed: 1
       movementSpeed: 3
       jumpForce: 1
