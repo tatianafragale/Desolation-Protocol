@@ -19,18 +19,22 @@ public class ScWeapon : MonoBehaviour
     
     public Camera fpsCam;
     public Transform atackPoint;
+    private Animator _anim;
 
     private void Awake()
     {
         bulletsLeft = magazineSize;
         shootCd.ResetCooldown();
+        _anim = GetComponent<Animator>();
     }
 
     private void TryShoot()
     {
         if (shootCd.IsReady && shooting && !reloading && bulletsLeft > 0)
         {
+
             Shoot();
+
         }
     }
 
@@ -50,6 +54,11 @@ public class ScWeapon : MonoBehaviour
         Invoke("TryShoot", shootTime);
         //bulletsLeft--;                                                    ACTIVAR SACAR BALAS
         
+         if (_anim != null)
+        {
+            _anim.SetTrigger("Fire");
+        }
+
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         Vector3 targetpoint;
