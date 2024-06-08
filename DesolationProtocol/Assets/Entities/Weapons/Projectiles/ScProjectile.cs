@@ -18,7 +18,7 @@ public class ScProjectile : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.TryGetComponent<ScEntity>(out ScEntity otherEntity))
         {

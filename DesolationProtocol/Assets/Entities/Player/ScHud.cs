@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class ScHud : MonoBehaviour
 {
     [SerializeField] GameObject MenuPausa;
-    [SerializeField] ScEntity _Entity;
+    [SerializeField] ScEntity _entity;
     [SerializeField] private Slider HpBar;
 
     public void TogglePause()
@@ -41,6 +41,6 @@ public class ScHud : MonoBehaviour
 
     public void CountHP()
     {
-        HpBar.value = _Entity.health / _Entity.Stats.maxHealth;
+        HpBar.value = _entity.health / _entity.Stats.maxHealth;
     }
 }

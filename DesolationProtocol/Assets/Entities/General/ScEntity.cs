@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.SceneManagement;
 
 public class ScEntity : MonoBehaviour
 {
@@ -123,6 +124,11 @@ public class ScEntity : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (Team == "Player")
+        {
+            Invoke("OnDeathLoadMainMenu", 5f);  
+        }
     }
 
     public void Heal(float heal)
@@ -191,5 +197,10 @@ public class ScEntity : MonoBehaviour
         {
             print("Silenciado");
         }
+    }
+
+    private void OnDeathLoadMainMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
     }
 }
