@@ -6,7 +6,6 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using static UnityEngine.InputSystem.InputAction;
 
 public class ScPlayer : MonoBehaviour

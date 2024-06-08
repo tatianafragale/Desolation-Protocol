@@ -202,5 +202,7 @@ public class ScEntity : MonoBehaviour
     private void OnDeathLoadMainMenu()
     {
         SceneManager.LoadScene("Main_Menu");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
