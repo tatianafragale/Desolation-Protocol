@@ -64,9 +64,9 @@ public class ScEntity : MonoBehaviour
     }
 
     //Health
-    public virtual void TakeDamage(float incomingDamage = 0, float incomingPenLinear = 0, float incomingPenPerc = 0)
+    public virtual void TakeDamage(float incomingDamage, float incomingPenLinear = 0, float incomingPenPerc = 0)
     {
-        if (health <= 0)
+        if (health > 0)
         {
             OnTakingDmg.Invoke();
             float finalArmor = (Stats.armor * (1 - incomingPenPerc) - incomingPenLinear); //Define Final Armor

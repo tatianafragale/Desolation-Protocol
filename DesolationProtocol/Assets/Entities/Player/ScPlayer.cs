@@ -90,7 +90,7 @@ public class ScPlayer : ScEntity
         _anim.SetBool("Landed", landed);
     }
 
-    public override void TakeDamage(float incomingDamage = 0, float incomingPenLinear = 0, float incomingPenPerc = 0)
+    public override void TakeDamage(float incomingDamage, float incomingPenLinear = 0, float incomingPenPerc = 0)
     {
         base.TakeDamage(incomingDamage, incomingPenLinear, incomingPenPerc);
         Hud.CountHP();
