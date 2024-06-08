@@ -8,38 +8,39 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
-public class ScPlayer : MonoBehaviour
+public class ScPlayer : ScEntity
 {
-    private ScEntity _entity;
-    private Rigidbody _rigidbody;
-    private Transform _transform;
-    [SerializeField] private float sens = 1;
-    private Animator _anim;
-    public Vector3 movement;
+    [SerializeField] private Transform FocusRotator;
+    [SerializeField] public float sens = 1;
     [SerializeField] private ScHud Hud;
-
+    public Vector3 movement;
+    public int totaljumps = 1;
+    private int _jumps = 1;
+    public float airControl = 0.8f;
+    public bool landed = true;
+    public float experience = 0f;
+    public float velocity = 0f;
 
 
     private void Awake()
     {
-        _entity = GetComponentInParent<ScEntity>();
         _rigidbody = GetComponentInParent<Rigidbody>();
-        _transform = GetComponentInChildren<Transform>();
         _anim = GetComponentInParent<Animator>();
-
-
     }
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        _jumps = totaljumps;
+        Hud.CountHP();
     }
 
     private void Update()
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
-        _transform.Rotate(_transform.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
-
+        FocusRotator.Rotate(FocusRotator.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
+        velocity = _rigidbody.velocity.magnitude;
     }
 
     private void FixedUpdate()
@@ -48,20 +49,20 @@ public class ScPlayer : MonoBehaviour
         if (movement != Vector3.zero)
         {
 
-            if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= _entity.Stats.movementSpeed)
+            if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= Stats.movementSpeed)
             {
-                if (_entity.landed)
+                if (landed)
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 100, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 100, ForceMode.Acceleration);
                 }
                 else
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * _entity.Stats.movementSpeed * 100 * _entity.airControl, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 100 * airControl, ForceMode.Acceleration);
                 }
             }
             else
             {
-                _rigidbody.velocity = _rigidbody.velocity.normalized * _entity.Stats.movementSpeed;
+                _rigidbody.velocity = _rigidbody.velocity.normalized * Stats.movementSpeed;
             }
         }
         else
@@ -73,6 +74,35 @@ public class ScPlayer : MonoBehaviour
         _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime);
     }
 
+
+    public void OnLand()
+    {
+        _anim.SetTrigger("Land");
+        _jumps = totaljumps;
+        landed = true;
+        _anim.SetBool("Landed", landed);
+    }
+
+    public void OnAir()
+    {
+        _jumps = totaljumps - 1;
+        landed = false;
+        _anim.SetBool("Landed", landed);
+    }
+
+    public override void TakeDamage(float incomingDamage = 0, float incomingPenLinear = 0, float incomingPenPerc = 0)
+    {
+        base.TakeDamage(incomingDamage, incomingPenLinear, incomingPenPerc);
+        Hud.CountHP();
+    }
+
+    public override void Heal(float heal)
+    {
+        base.Heal(heal);
+        Hud.CountHP();
+    }
+
+    //inputs
     public void Test(InputAction.CallbackContext CallbackContext)
     {
         if (CallbackContext.performed)
@@ -86,6 +116,7 @@ public class ScPlayer : MonoBehaviour
         if (CallbackContext.performed || CallbackContext.canceled)
         {
             movement = new Vector3(CallbackContext.ReadValue<Vector2>().x, 0f, CallbackContext.ReadValue<Vector2>().y);
+            print(movement);
         }
     }
 
@@ -93,7 +124,17 @@ public class ScPlayer : MonoBehaviour
     {
         if (CallbackContext.performed)
         {
-            _entity.Jump();
+            if (_jumps > 0)
+            {
+                _anim.SetTrigger("Jump");
+
+                _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
+                _rigidbody.AddForce(_rigidbody.transform.up * Stats.jumpForce * 5f, ForceMode.VelocityChange);
+                if (_jumps > 0)
+                {
+                    _jumps--;
+                }
+            }
         }
     }
 
@@ -109,17 +150,17 @@ public class ScPlayer : MonoBehaviour
     {
         if (CallbackContext.performed)
         {
-            _entity.GetComponent<ScWeapon>().SetShooting(true);
+            GetComponent<ScWeapon>().SetShooting(true);
         }
         if (CallbackContext.canceled)
         {
-            _entity.GetComponent<ScWeapon>().SetShooting(false);
+            GetComponent<ScWeapon>().SetShooting(false);
         }
     }
 
     private void TryAbility(InputAction.CallbackContext CallbackContext, int Selected)
     {
-        if (CallbackContext.performed) _entity.TryAbility(Selected);
+        if (CallbackContext.performed) TryAbility(Selected);
     }
 
     public void TryAbility0(InputAction.CallbackContext CallbackContext)
@@ -149,5 +190,4 @@ public class ScPlayer : MonoBehaviour
             Hud.TogglePause();
         }
     }
-
 }

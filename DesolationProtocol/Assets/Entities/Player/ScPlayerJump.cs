@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ScPlayerJump : MonoBehaviour
 {
-    private ScEntity _entity;
+    private ScPlayer _player;
     private int i;
 
     private void Awake()
     {
-        _entity = GetComponentInParent<ScEntity>();
+        _player = GetComponentInParent<ScPlayer>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         i++;
-        _entity.OnLand();
+        _player.OnLand();
     }
 
     private void OnTriggerExit(Collider collision)
@@ -23,7 +23,7 @@ public class ScPlayerJump : MonoBehaviour
         i--;
         if (i == 0)
         {
-            _entity.OnAir();
+            _player.OnAir();
         }
     }
 }
