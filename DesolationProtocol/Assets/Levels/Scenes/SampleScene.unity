@@ -46405,7 +46405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1229428778265251191, guid: 618d868564fe66b418eba4fda5c3568b, type: 3}
       propertyPath: m_text
-      value: Controles
+      value: Controls
       objectReference: {fileID: 0}
     - target: {fileID: 3153187803636774731, guid: 618d868564fe66b418eba4fda5c3568b, type: 3}
       propertyPath: m_Pivot.x

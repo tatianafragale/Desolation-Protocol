@@ -20,8 +20,8 @@ public class ScEntity : MonoBehaviour
     public int level = 0;
 
     protected Rigidbody _rigidbody;
-
     protected Animator _anim;
+    protected AudioSource _audioSource;
 
     [SerializeField] protected ScAbility[] abilities;
 
@@ -55,6 +55,11 @@ public class ScEntity : MonoBehaviour
     {
         Stats = linkStats.GetStats(entityName, level); //get stats per lvl
         //items modifiers
+    }
+
+    protected virtual void Update()
+    {
+        //update
     }
 
     protected virtual void FixedUpdate()

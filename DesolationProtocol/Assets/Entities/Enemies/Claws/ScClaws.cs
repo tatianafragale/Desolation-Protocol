@@ -25,7 +25,7 @@ public class ScClaws : MonoBehaviour
 
     private void Awake()
     {
-        Player = FindObjectOfType<ScPlayer>().transform;
+        Player = FindObjectOfType<ScEntityPlayer>().transform;
         _agent = GetComponent<NavMeshAgent>();
 
         _anim = GetComponentInChildren<Animator>();

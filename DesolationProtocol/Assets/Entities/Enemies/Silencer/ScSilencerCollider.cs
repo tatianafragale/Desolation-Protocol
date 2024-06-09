@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ScSilencerCollider : MonoBehaviour
 {
-    private ScSilencer Silencer;
+    private ScEntitySilencer Silencer;
     public SphereCollider SphereCollider;
 
     private void Awake()
     {
-        Silencer = GetComponentInParent<ScSilencer>();
+        Silencer = GetComponentInParent<ScEntitySilencer>();
         SphereCollider = GetComponent<SphereCollider>();
     }
 
     private void Start()
     {
-        SphereCollider.radius = Silencer.SilenceDistance;
+        SphereCollider.radius = Silencer.silenceDistance;
     }
 
     private void OnTriggerEnter(Collider other)

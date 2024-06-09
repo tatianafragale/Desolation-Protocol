@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI; // Importante para el navmesh
 
-public class ExplodingMutant : MonoBehaviour
+public class ScEntityExplosive : ScEntityEnemy
 {
-    private ScEntity _entity;
-    private ScEnemyChase _enemyChase;
     private bool _isExploding = false;
 
     //variables
@@ -15,15 +13,9 @@ public class ExplodingMutant : MonoBehaviour
     [SerializeField] private GameObject FatMutant, Explosion;
     [SerializeField] private LayerMask PlayerLayer, DmgLayer, BlockLayer;
 
-    private Animator _anim; // TENDRIA SENTIDO QUE ESTO SALGA DIRECTO DESDE ENTITY
-
-    private AudioSource _audioSource;
-
-    private void Awake()
+    protected override void Awake()
     {
-        _entity = GetComponent<ScEntity>();
-        _enemyChase = GetComponent<ScEnemyChase>();
-
+        base.Awake();
         _anim = GetComponentInChildren<Animator>();
 
         FatMutant.SetActive(true);
@@ -33,20 +25,20 @@ public class ExplodingMutant : MonoBehaviour
 
     }
 
-    private void Update()
+    protected override void Update()
     {
         //Check if player is in attack range
-
+        base.Update();
         bool _playerInAttackRange = Physics.CheckSphere(transform.position, _explosionRange, PlayerLayer);
         if (!_isExploding)
         {
             if (!_playerInAttackRange)
             {
-                _enemyChase.KeepMoving();
+                KeepTracking();
             }
             else
             {
-                _enemyChase.Stop();
+                StopTracking();
                 _isExploding = true;
                 _anim.SetTrigger("ExplodeAttack");
             }
@@ -63,7 +55,7 @@ public class ExplodingMutant : MonoBehaviour
         Collider[] entitiesInRange = Physics.OverlapSphere(transform.position, _explosionRange);
         foreach (Collider entity in entitiesInRange)
         {
-            if (entity.GetComponent<ScEntity>() != null && entity.GetComponent<ScEntity>() != _entity)
+            if (entity.GetComponent<ScEntity>() != null && entity.GetComponent<ScEntity>() != this)
             {
                 ScEntity LocalEntity = entity.GetComponent<ScEntity>();
                 if (doRaycast)
@@ -78,21 +70,16 @@ public class ExplodingMutant : MonoBehaviour
 
                     if (DmgHit.distance < BlockHit.distance || !BlockHit.collider)
                     {
-                        LocalEntity.TakeDamage(Random.Range(_entity.Stats.damage, _entity.Stats.damage * _entity.Stats.critMultiplier));
+                        LocalEntity.TakeDamage(Random.Range(Stats.damage, Stats.damage * Stats.critMultiplier));
                     }
                 }
                 else
                 {
-                    LocalEntity.TakeDamage(Random.Range(_entity.Stats.damage, _entity.Stats.damage * _entity.Stats.critMultiplier));
+                    LocalEntity.TakeDamage(Random.Range(Stats.damage, Stats.damage * Stats.critMultiplier));
                 }
             }
         }
-        Invoke("WaitForDestroy", 2);
-    }
-
-    private void WaitForDestroy()
-    {
-        Destroy(gameObject);
+        Destroy(gameObject, 2);
     }
 
     private void OnDrawGizmos()

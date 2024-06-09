@@ -8,11 +8,9 @@ public class ScWaves : MonoBehaviour
 {
     private int ActualWave = 0;
 
-
     [SerializeField] private GameObject[] Enemies;
     [SerializeField] private Transform PositionmMin;
     [SerializeField] private Transform PositionMax;
-
 
     void Start()
     {

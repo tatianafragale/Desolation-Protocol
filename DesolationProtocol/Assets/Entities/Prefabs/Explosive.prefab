@@ -616,9 +616,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4086743372738136574}
+  - component: {fileID: 6102794924349525364}
   - component: {fileID: 1946350177257651959}
-  - component: {fileID: 408253424090369385}
-  - component: {fileID: 7038814136623598959}
   - component: {fileID: 4343425577979544583}
   - component: {fileID: 905451790788309129}
   - component: {fileID: 6961921930915876864}
@@ -649,6 +648,70 @@ Transform:
   - {fileID: 4697224650367416842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6102794924349525364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746106336242127684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961af4b370b5b514787e9a6d88fb3e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
+  entityName: Explosive
+  Team: Enemy
+  Stats:
+    maxHealth: 100
+    regeneration: 0
+    armor: 10
+    damage: 10
+    attackSpeed: 1
+    movementSpeed: 1
+    jumpForce: 1
+    critPercent: 1
+    critMultiplier: 1.2
+    cooldowns: 1
+  health: 100
+  level: 0
+  abilities: []
+  silencers: 0
+  OnTakingDmg:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6102794924349525364}
+        m_TargetAssemblyTypeName: ScEntityExplosive, Assembly-CSharp
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _explosionRange: 0
+  doRaycast: 1
+  FatMutant: {fileID: 5493894508233848889}
+  Explosion: {fileID: 4697224650367693064}
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  DmgLayer:
+    serializedVersion: 2
+    m_Bits: 896
+  BlockLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &1946350177257651959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,15 +740,8 @@ MonoBehaviour:
     cooldowns: 1
   health: 100
   level: 0
-  experience: 0
-  totaljumps: 1
-  airControl: 0.8
-  Velocity: 0
-  landed: 1
-  OnLandCollider: {fileID: 0}
   abilities: []
-  Manager: {fileID: 0}
-  silenced: 0
+  silencers: 0
   OnTakingDmg:
     m_PersistentCalls:
       m_Calls: []
@@ -695,7 +751,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 408253424090369385}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ExplodingMutant, Assembly-CSharp
         m_MethodName: Explode
         m_Mode: 1
@@ -707,47 +763,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &408253424090369385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3746106336242127684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 961af4b370b5b514787e9a6d88fb3e55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _explosionRange: 5
-  doRaycast: 1
-  FatMutant: {fileID: 5493894508233848889}
-  Explosion: {fileID: 4697224650367693064}
-  PlayerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  DmgLayer:
-    serializedVersion: 2
-    m_Bits: 896
-  BlockLayer:
-    serializedVersion: 2
-    m_Bits: 1
---- !u!114 &7038814136623598959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3746106336242127684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47dd93155ec7fae4e86a62febaecdce0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 0}
-  _target: {fileID: 0}
-  _active: 1
-  rotateidle: 0
 --- !u!54 &4343425577979544583
 Rigidbody:
   m_ObjectHideFlags: 0

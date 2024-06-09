@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
-public class ScPlayer : ScEntity
+public class ScEntityPlayer : ScEntity
 {
     [SerializeField] private Transform FocusRotator;
     [SerializeField] public float sens = 1;
@@ -29,7 +29,7 @@ public class ScPlayer : ScEntity
         Hud.CountHP();
     }
 
-    protected void Update()
+    protected override void Update()
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
         FocusRotator.Rotate(FocusRotator.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
