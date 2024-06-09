@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class ScEntityPlayer : ScEntity
@@ -94,13 +91,25 @@ public class ScEntityPlayer : ScEntity
         Hud.CountHP();
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        Invoke("OnDeathLoadMainMenu", 5f);
+    }
+
     //inputs
     public void Test(InputAction.CallbackContext CallbackContext)
     {
         if (CallbackContext.performed)
         {
-            
+            Invoke("OnDeathLoadMainMenu", 5f);
         }
+    }
+    private void OnDeathLoadMainMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void Movement(InputAction.CallbackContext CallbackContext)

@@ -617,7 +617,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4086743372738136574}
   - component: {fileID: 6102794924349525364}
-  - component: {fileID: 1946350177257651959}
   - component: {fileID: 4343425577979544583}
   - component: {fileID: 905451790788309129}
   - component: {fileID: 6961921930915876864}
@@ -639,13 +638,14 @@ Transform:
   m_GameObject: {fileID: 3746106336242127684}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.55, y: 5.5, z: -6.42}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3359, y: 1.3359, z: 1.3359}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8423795899732552042}
   - {fileID: 230147421754535533}
   - {fileID: 4697224650367416842}
+  - {fileID: 1544908230921864807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6102794924349525364
@@ -699,7 +699,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _explosionRange: 0
+  _explosionRange: 4
   doRaycast: 1
   FatMutant: {fileID: 5493894508233848889}
   Explosion: {fileID: 4697224650367693064}
@@ -712,57 +712,6 @@ MonoBehaviour:
   BlockLayer:
     serializedVersion: 2
     m_Bits: 1
---- !u!114 &1946350177257651959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3746106336242127684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bdc23ee78b56fd48b3522d3ac66f755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
-  entityName: Explosive
-  Team: Enemy
-  Stats:
-    maxHealth: 100
-    regeneration: 0
-    armor: 10
-    damage: 10
-    attackSpeed: 1
-    movementSpeed: 1
-    jumpForce: 1
-    critPercent: 1
-    critMultiplier: 1.2
-    cooldowns: 1
-  health: 100
-  level: 0
-  abilities: []
-  silencers: 0
-  OnTakingDmg:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHeal:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ExplodingMutant, Assembly-CSharp
-        m_MethodName: Explode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!54 &4343425577979544583
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10716,6 +10665,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1676469032690350269}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6100732863034051027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544908230921864807}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544908230921864807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100732863034051027}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4086743372738136574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6296513787861755476
 GameObject:

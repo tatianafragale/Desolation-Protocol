@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 using UnityEngine.SceneManagement;
 
 public class ScEntity : MonoBehaviour
@@ -93,16 +89,11 @@ public class ScEntity : MonoBehaviour
 
     protected virtual void Die()
     {
-        _anim.SetTrigger("Death");
         OnDeath.Invoke();
+        _anim.SetTrigger("Death");
         if (Team == "Enemy" && entityName != "Explosive")
         {
             Destroy(gameObject);
-        }
-
-        if (Team == "Player")
-        {
-            Invoke("OnDeathLoadMainMenu", 5f);
         }
     }
 
@@ -137,12 +128,5 @@ public class ScEntity : MonoBehaviour
         {
             print("Silenciado");
         }
-    }
-
-    private void OnDeathLoadMainMenu()
-    {
-        SceneManager.LoadScene("Main_Menu");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
     }
 }

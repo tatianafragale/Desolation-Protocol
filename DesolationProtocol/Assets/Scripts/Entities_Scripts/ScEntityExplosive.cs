@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; // Importante para el navmesh
 
 public class ScEntityExplosive : ScEntityEnemy
 {
@@ -27,7 +26,6 @@ public class ScEntityExplosive : ScEntityEnemy
 
     protected override void Update()
     {
-        //Check if player is in attack range
         base.Update();
         bool _playerInAttackRange = Physics.CheckSphere(transform.position, _explosionRange, PlayerLayer);
         if (!_isExploding)
@@ -52,6 +50,8 @@ public class ScEntityExplosive : ScEntityEnemy
 
         _audioSource.Play();
 
+        float LocalDamage = Random.Range(Stats.damage, Stats.damage * Stats.critMultiplier);
+
         Collider[] entitiesInRange = Physics.OverlapSphere(transform.position, _explosionRange);
         foreach (Collider entity in entitiesInRange)
         {
@@ -70,12 +70,12 @@ public class ScEntityExplosive : ScEntityEnemy
 
                     if (DmgHit.distance < BlockHit.distance || !BlockHit.collider)
                     {
-                        LocalEntity.TakeDamage(Random.Range(Stats.damage, Stats.damage * Stats.critMultiplier));
+                        LocalEntity.TakeDamage(LocalDamage);
                     }
                 }
                 else
                 {
-                    LocalEntity.TakeDamage(Random.Range(Stats.damage, Stats.damage * Stats.critMultiplier));
+                    LocalEntity.TakeDamage(LocalDamage);
                 }
             }
         }
