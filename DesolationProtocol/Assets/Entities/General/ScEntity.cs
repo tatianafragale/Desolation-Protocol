@@ -32,7 +32,7 @@ public class ScEntity : MonoBehaviour
     public UnityEvent OnHeal;
     public UnityEvent OnDeath;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
@@ -57,7 +57,7 @@ public class ScEntity : MonoBehaviour
         //items modifiers
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         //Regen
         if (0 < health && health < Stats.maxHealth && Stats.regeneration != 0) Heal(Stats.regeneration * Time.fixedDeltaTime);
@@ -86,7 +86,7 @@ public class ScEntity : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         _anim.SetTrigger("Death");
         OnDeath.Invoke();
@@ -108,7 +108,7 @@ public class ScEntity : MonoBehaviour
         if (health > Stats.maxHealth) health = Stats.maxHealth;
     }
 
-    public void TryAbility(int _selected)
+    public virtual void TryAbility(int _selected)
     {
         if (silencers == 0)
         {
