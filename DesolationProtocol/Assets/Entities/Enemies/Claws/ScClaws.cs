@@ -20,8 +20,6 @@ public class ScClaws : MonoBehaviour
     private bool _alreadyAttacked = false;
     [SerializeField] private float _timeBetweenAttacks;
     [SerializeField] private Collider _claws;
-    //[SerializeField] private int _maxAttackDMG;
-    //[SerializeField] private int _minAttackDMG;
 
     private bool _enemyInHitDistance;
 

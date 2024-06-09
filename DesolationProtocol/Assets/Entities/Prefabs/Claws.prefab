@@ -1569,7 +1569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8609804283787491311}
   - component: {fileID: 4026396332528554069}
-  - component: {fileID: 2003923446059508845}
+  - component: {fileID: 4743200029984269127}
   m_Layer: 8
   m_Name: Claw
   m_TagString: Untagged
@@ -1618,7 +1618,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.3}
   m_Center: {x: 0, y: 0.2, z: 0}
---- !u!114 &2003923446059508845
+--- !u!114 &4743200029984269127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1627,11 +1627,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5433072789715674406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66581c833eaa99c429b64882832ae986, type: 3}
+  m_Script: {fileID: 11500000, guid: 56747f19c6f64724b859384601e59b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxAttackDMG: 2
-  _minAttackDMG: 7
+  Entity: {fileID: 5146489284066494975}
 --- !u!1 &5560268757154382809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,14 +2277,7 @@ MonoBehaviour:
     cooldowns: 1
   health: 100
   level: 0
-  experience: 0
-  totaljumps: 1
-  airControl: 0.8
-  Velocity: 0
-  landed: 1
-  OnLandCollider: {fileID: 0}
   abilities: []
-  Manager: {fileID: 0}
   silencers: 0
   OnTakingDmg:
     m_PersistentCalls:

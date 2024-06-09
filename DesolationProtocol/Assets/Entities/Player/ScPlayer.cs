@@ -19,8 +19,6 @@ public class ScPlayer : ScEntity
     public float airControl = 0.8f;
     public bool landed = true;
     public float experience = 0f;
-    public float velocity = 0f;
-
 
     private void Awake()
     {
@@ -40,7 +38,6 @@ public class ScPlayer : ScEntity
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
         FocusRotator.Rotate(FocusRotator.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
-        velocity = _rigidbody.velocity.magnitude;
     }
 
     private void FixedUpdate()
@@ -116,7 +113,6 @@ public class ScPlayer : ScEntity
         if (CallbackContext.performed || CallbackContext.canceled)
         {
             movement = new Vector3(CallbackContext.ReadValue<Vector2>().x, 0f, CallbackContext.ReadValue<Vector2>().y);
-            print(movement);
         }
     }
 
