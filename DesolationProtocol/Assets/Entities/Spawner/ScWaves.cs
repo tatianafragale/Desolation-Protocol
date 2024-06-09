@@ -24,19 +24,26 @@ public class ScWaves : MonoBehaviour
         for (int i = 0; i < (10 + 2 * (ActualWave - 1)); i++)
         {
             int random = Random.Range(0, 100);
-            if (random <60)
+            if (random <50)
             {
                 SpawnEnemy(0);
             }
             else
             {
-                if (random<80)
+                if (random<70)
                 {
                     SpawnEnemy(1);
                 }
                 else
                 {
-                    SpawnEnemy(2);
+                    if (random < 90)
+                    {
+                        SpawnEnemy(2);
+                    }
+                    else
+                    {
+                        SpawnEnemy(3);
+                    }
                 }
             }
         }
