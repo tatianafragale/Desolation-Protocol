@@ -17,14 +17,14 @@ public class ScAbilityDash : ScAbility
 
     private IEnumerator Dashing(ScEntity entity)
     {
-        float timer = 0f;
-
         Rigidbody _rigidbody = entity.GetComponent<Rigidbody>();
         _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+        Vector3 direction = _rigidbody.transform.forward;
 
+        float timer = 0f;
         while (timer < duration)
         {
-            _rigidbody.AddForce(_rigidbody.transform.forward * strength, ForceMode.Impulse);
+            _rigidbody.AddForce(direction * strength, ForceMode.Impulse);
             timer += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }

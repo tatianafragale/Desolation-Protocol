@@ -38,7 +38,7 @@ public class ScEntity : MonoBehaviour
             if (abilities[i] != null)
             {
                 abilities[i] = Instantiate(abilities[i]);
-                abilities[i].cooldown.ResetCooldown();
+                //abilities[i].cooldown.ResetCooldown();
             }
         }
         SetStats();

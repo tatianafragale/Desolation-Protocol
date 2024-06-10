@@ -29,4 +29,9 @@ public class CoroutineHandler : MonoBehaviour
     {
         StopCoroutine(coroutine);
     }
+
+    public void StopAllRoutine(IEnumerator coroutine)
+    {
+        StopAllRoutine(coroutine);
+    }
 }

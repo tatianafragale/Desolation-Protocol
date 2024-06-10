@@ -1,43 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ScAbility : ScriptableObject
 {
-    public string title;
-    public Sprite icon;
-    [SerializeField] private float cooldownTime = 10f;
+    [SerializeField] public string title;
+    [SerializeField] public Sprite icon;
+    [SerializeField] public float cooldownTime = 10f;
+    [SerializeField] public int maxCharges = 1;
     public ScCooldown cooldown;
+
+    private int _charges;
+
+    public virtual void Awake()
+    {
+        _charges = maxCharges;
+    }
 
     public virtual void Try(ScEntity entity)
     {
-        if (cooldown.IsReady)
+        if (_charges > 0)
         {
             Activate(entity);
+            Debug.Log(_charges);
+            //Debug.Log("Activated");
         }
         else
         {
-            Debug.Log("On CD Sound");
+            //Debug.Log("On CD Sound");
         }
     }
 
     protected virtual void Activate(ScEntity entity)
     {
-        cooldown.StartCooldown(cooldownTime/ entity.Stats.cooldowns);
+        _charges--;
+        if (_charges == maxCharges - 1)
+        {
+            StartCoroutine(Cooldown(entity));
+        }
     }
 
-    public virtual void Cancel()
+    public virtual bool Cancel(ScEntity entity)
     {
-        
+        return true;
     }
 
-    public void StartCoroutine(IEnumerator coroutine)
+    protected void StartCoroutine(IEnumerator coroutine)
     {
         CoroutineHandler.Instance.StartRoutine(coroutine);
     }
 
-    public void StopRoutine(IEnumerator coroutine)
+    protected void StopAllRoutine(IEnumerator coroutine)
     {
-        CoroutineHandler.Instance.StopRoutine(coroutine);
+        CoroutineHandler.Instance.StopAllRoutine(coroutine);
+    }
+
+    protected IEnumerator Cooldown(ScEntity entity)
+    {
+        if (_charges < maxCharges)
+        {
+            cooldown.StartCooldown(cooldownTime / entity.Stats.cooldowns);
+            yield return new WaitForSeconds(cooldownTime / entity.Stats.cooldowns);
+            _charges++;
+            Debug.Log(_charges);
+            StartCoroutine(Cooldown(entity));
+        }
     }
 }

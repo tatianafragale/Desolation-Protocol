@@ -25,7 +25,6 @@ public class ScAbilityHealing : ScAbility
     private IEnumerator HealingPerTime(ScEntity entity)
     {
         float timer = 0f;
-
         while (timer < duration)
         {
             entity.Heal(percent * entity.Stats.maxHealth * Time.fixedDeltaTime);

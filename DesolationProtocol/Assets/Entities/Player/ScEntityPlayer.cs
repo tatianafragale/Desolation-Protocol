@@ -64,7 +64,7 @@ public class ScEntityPlayer : ScEntity
                 //_rigidbody.velocity = new Vector3(_rigidbody.velocity.x * 0.95f, _rigidbody.velocity.y, _rigidbody.velocity.z * 0.95f);
             }
         }
-
+        //(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * _rigidbody.velocity).normalized.x
 
         _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime);
         _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime);
