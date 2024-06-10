@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
-public class ScPlayer : ScEntity
+public class ScEntityPlayer : ScEntity
 {
     [SerializeField] private Transform FocusRotator;
     [SerializeField] public float sens = 1;
@@ -20,11 +17,6 @@ public class ScPlayer : ScEntity
     public bool landed = true;
     public float experience = 0f;
 
-    private void Awake()
-    {
-        _rigidbody = GetComponentInParent<Rigidbody>();
-        _anim = GetComponentInParent<Animator>();
-    }
     protected override void Start()
     {
         base.Start();
@@ -34,15 +26,15 @@ public class ScPlayer : ScEntity
         Hud.CountHP();
     }
 
-    private void Update()
+    protected override void Update()
     {
         _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
         FocusRotator.Rotate(FocusRotator.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
-
+        base.FixedUpdate();
         if (movement != Vector3.zero)
         {
 
@@ -99,13 +91,25 @@ public class ScPlayer : ScEntity
         Hud.CountHP();
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        Invoke("OnDeathLoadMainMenu", 5f);
+    }
+
     //inputs
     public void Test(InputAction.CallbackContext CallbackContext)
     {
         if (CallbackContext.performed)
         {
-            
+            Invoke("OnDeathLoadMainMenu", 5f);
         }
+    }
+    private void OnDeathLoadMainMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void Movement(InputAction.CallbackContext CallbackContext)
@@ -123,10 +127,9 @@ public class ScPlayer : ScEntity
             if (_jumps > 0)
             {
                 _anim.SetTrigger("Jump");
-
                 _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
                 _rigidbody.AddForce(_rigidbody.transform.up * Stats.jumpForce * 5f, ForceMode.VelocityChange);
-                if (_jumps > 0)
+                if (!landed)
                 {
                     _jumps--;
                 }

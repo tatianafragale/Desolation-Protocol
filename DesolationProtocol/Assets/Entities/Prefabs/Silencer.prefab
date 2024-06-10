@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 6192512161680874305}
   - component: {fileID: 2995628397813824851}
   - component: {fileID: 7634127929778258206}
-  - component: {fileID: 3471233407003826163}
   - component: {fileID: 4528735540242238148}
   - component: {fileID: 3320685571366659027}
   - component: {fileID: 1159484704257165620}
@@ -128,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 602292096242277249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.865643, y: 5.5, z: 5.7653}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170,8 +169,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b685e449fe1a5fd499a11504cdcd8165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
+  entityName: Silencer
+  Team: Enemy
+  Stats:
+    maxHealth: 100
+    regeneration: 0
+    armor: 10
+    damage: 10
+    attackSpeed: 1
+    movementSpeed: 1
+    jumpForce: 1
+    critPercent: 1
+    critMultiplier: 1.2
+    cooldowns: 1
+  health: 100
+  level: 0
+  abilities: []
+  silencers: 0
+  OnTakingDmg:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   walkDistance: 20
-  SilenceDistance: 30
+  silenceDistance: 40
   layerMask:
     serializedVersion: 2
     m_Bits: 384
@@ -203,15 +229,7 @@ MonoBehaviour:
     cooldowns: 1
   health: 100
   level: 0
-  experience: 0
-  totaljumps: 1
-  airControl: 0.8
-  Velocity: 0
-  landed: 1
-  OnLandCollider: {fileID: 0}
   abilities: []
-  Manager: {fileID: 0}
-  silenced: 0
   silencers: 0
   OnTakingDmg:
     m_PersistentCalls:
@@ -222,22 +240,6 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3471233407003826163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602292096242277249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47dd93155ec7fae4e86a62febaecdce0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 4528735540242238148}
-  _target: {fileID: 0}
-  _active: 1
-  rotateidle: 0
 --- !u!195 &4528735540242238148
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1241,7 +1243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c995ec34dd94ce2499bfaccaef098847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SphereCollider: {fileID: 0}
+  SphereCollider: {fileID: 6690196740683939385}
 --- !u!1 &4124788363545891965
 GameObject:
   m_ObjectHideFlags: 0

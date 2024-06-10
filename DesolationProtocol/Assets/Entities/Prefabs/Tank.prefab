@@ -2600,12 +2600,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4447474837955427790}
   - component: {fileID: 7124641501437037902}
-  - component: {fileID: 8126184457420117239}
   - component: {fileID: 4291398734819363431}
   - component: {fileID: 4520175083870746361}
   - component: {fileID: 5859228839443011528}
   - component: {fileID: -8224831406172479103}
-  - component: {fileID: 7504626655356929088}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Player
@@ -2622,7 +2620,7 @@ Transform:
   m_GameObject: {fileID: 8890018541995895368}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.22049, y: 5.5000005, z: -3.5706034}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2642,19 +2640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d52124eb7257e4fadb0be00ffe15e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
---- !u!114 &8126184457420117239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8890018541995895368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bdc23ee78b56fd48b3522d3ac66f755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   linkStats: {fileID: 6760126694860531315, guid: 2aedf3eea69180749acbc1dac76bf6ca, type: 3}
   entityName: Tank
   Team: Enemy
@@ -2671,15 +2656,8 @@ MonoBehaviour:
     cooldowns: 1
   health: 100
   level: 0
-  experience: 0
-  totaljumps: 1
-  airControl: 0.8
-  Velocity: 0
-  landed: 1
-  OnLandCollider: {fileID: 0}
   abilities: []
-  Manager: {fileID: 0}
-  silenced: 0
+  silencers: 0
   OnTakingDmg:
     m_PersistentCalls:
       m_Calls: []
@@ -2782,22 +2760,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7504626655356929088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8890018541995895368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47dd93155ec7fae4e86a62febaecdce0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 0}
-  _target: {fileID: 0}
-  _active: 1
-  rotateidle: 0
 --- !u!1 &9075491938836472586
 GameObject:
   m_ObjectHideFlags: 0

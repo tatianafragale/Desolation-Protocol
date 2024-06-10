@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ScPlayerJump : MonoBehaviour
 {
-    private ScPlayer _player;
+    private ScEntityPlayer _player;
     private int i;
 
     private void Awake()
     {
-        _player = GetComponentInParent<ScPlayer>();
+        _player = GetComponentInParent<ScEntityPlayer>();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 using UnityEngine.SceneManagement;
 
 public class ScEntity : MonoBehaviour
@@ -20,8 +16,8 @@ public class ScEntity : MonoBehaviour
     public int level = 0;
 
     protected Rigidbody _rigidbody;
-
     protected Animator _anim;
+    protected AudioSource _audioSource;
 
     [SerializeField] protected ScAbility[] abilities;
 
@@ -32,7 +28,7 @@ public class ScEntity : MonoBehaviour
     public UnityEvent OnHeal;
     public UnityEvent OnDeath;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
@@ -57,7 +53,12 @@ public class ScEntity : MonoBehaviour
         //items modifiers
     }
 
-    private void FixedUpdate()
+    protected virtual void Update()
+    {
+        //update
+    }
+
+    protected virtual void FixedUpdate()
     {
         //Regen
         if (0 < health && health < Stats.maxHealth && Stats.regeneration != 0) Heal(Stats.regeneration * Time.fixedDeltaTime);
@@ -86,19 +87,12 @@ public class ScEntity : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
-        _anim.SetTrigger("Death");
         OnDeath.Invoke();
-        if (Team == "Enemy" && entityName != "Explosive")
-        {
-            Destroy(gameObject);
-        }
-
-        if (Team == "Player")
-        {
-            Invoke("OnDeathLoadMainMenu", 5f);
-        }
+        _anim.SetTrigger("Death");
+        Destroy(GetComponent<Rigidbody>());
+        Destroy(GetComponent<CapsuleCollider>());
     }
 
     public virtual void Heal(float heal)
@@ -108,7 +102,7 @@ public class ScEntity : MonoBehaviour
         if (health > Stats.maxHealth) health = Stats.maxHealth;
     }
 
-    public void TryAbility(int _selected)
+    public virtual void TryAbility(int _selected)
     {
         if (silencers == 0)
         {
@@ -132,12 +126,5 @@ public class ScEntity : MonoBehaviour
         {
             print("Silenciado");
         }
-    }
-
-    private void OnDeathLoadMainMenu()
-    {
-        SceneManager.LoadScene("Main_Menu");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
     }
 }
