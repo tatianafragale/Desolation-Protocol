@@ -12,7 +12,6 @@ public class ScAbilityTeleport : ScAbility
 
     public override void Try(ScEntity entity)
     {
-        Debug.Log("s");
         if (!target)
         {
             base.Try(entity);
