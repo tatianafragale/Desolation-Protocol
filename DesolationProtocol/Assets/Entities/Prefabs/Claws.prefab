@@ -2375,8 +2375,6 @@ MonoBehaviour:
   health: 100
   level: 0
   abilities: []
-  abilities2:
-  - {fileID: 0}
   silencers: 0
   OnTakingDmg:
     m_PersistentCalls:

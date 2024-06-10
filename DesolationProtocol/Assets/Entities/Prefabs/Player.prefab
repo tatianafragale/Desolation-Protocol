@@ -4017,6 +4017,7 @@ MonoBehaviour:
   abilities:
   - {fileID: 11400000, guid: 5da56ad299f823f4c962a5a484c9053b, type: 2}
   - {fileID: 11400000, guid: 871e927dee001ca4d954d991756f5e02, type: 2}
+  - {fileID: 11400000, guid: 0e6d3b7e726d5b247ad9a055a8bbe909, type: 2}
   silencers: 0
   OnTakingDmg:
     m_PersistentCalls:
@@ -4035,7 +4036,6 @@ MonoBehaviour:
   airControl: 0.8
   landed: 1
   experience: 0
-  velocity: 0
 --- !u!114 &6864857975242942794
 MonoBehaviour:
   m_ObjectHideFlags: 0

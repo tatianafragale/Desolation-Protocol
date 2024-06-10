@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScClawsHand : MonoBehaviour
 {
-    [SerializeField] private ScEntity Entity;
+    [SerializeField] private ScEntityClaws Entity;
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -13,6 +13,7 @@ public class ScClawsHand : MonoBehaviour
             if (OtherEntity.Team != Entity.Team)
             {
                 OtherEntity.TakeDamage(Entity.Stats.damage);
+                Entity.DeactiveClaws();
             }
         }
     }

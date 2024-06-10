@@ -6,7 +6,7 @@ public class ScTeleportObject : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     [SerializeField] public bool _moving = true;
-    [SerializeField] private float strenght = 10;
+    [SerializeField] public float strength;
 
     private void Awake()
     {
@@ -15,9 +15,9 @@ public class ScTeleportObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_moving)
+        if (_moving && _rigidbody)
         {
-            _rigidbody.AddForce(_rigidbody.transform.forward * strenght);
+            _rigidbody.AddForce(_rigidbody.transform.forward * strength);
         }
     }
 }
