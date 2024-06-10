@@ -21,10 +21,23 @@ public class ScAbility : ScriptableObject
         }
     }
 
-    public virtual void Activate(ScEntity entity)
+    protected virtual void Activate(ScEntity entity)
     {
         cooldown.StartCooldown(cooldownTime/ entity.Stats.cooldowns);
     }
 
-    public virtual void Cancel() { }
+    public virtual void Cancel()
+    {
+        
+    }
+
+    public void StartCoroutine(IEnumerator coroutine)
+    {
+        CoroutineHandler.Instance.StartRoutine(coroutine);
+    }
+
+    public void StopRoutine(IEnumerator coroutine)
+    {
+        CoroutineHandler.Instance.StopRoutine(coroutine);
+    }
 }

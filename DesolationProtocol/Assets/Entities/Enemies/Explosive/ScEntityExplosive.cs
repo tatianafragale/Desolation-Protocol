@@ -27,10 +27,9 @@ public class ScEntityExplosive : ScEntityEnemy
     protected override void Update()
     {
         base.Update();
-        bool _playerInAttackRange = Physics.CheckSphere(transform.position, _explosionRange, PlayerLayer);
         if (!_isExploding)
         {
-            if (!_playerInAttackRange)
+            if (!Physics.CheckSphere(transform.position, _explosionRange, PlayerLayer))
             {
                 KeepTracking();
             }
@@ -41,6 +40,12 @@ public class ScEntityExplosive : ScEntityEnemy
                 _anim.SetTrigger("ExplodeAttack");
             }
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        Explode();
     }
 
     public void Explode()

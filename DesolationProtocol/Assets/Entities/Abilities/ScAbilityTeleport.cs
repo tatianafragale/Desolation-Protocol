@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Teleport", menuName = "Abilities/Movement/Teleport")]
 public class ScAbilityTeleport : ScAbility
 {
     [SerializeField] private float distance;
-    public override void Activate(ScEntity entity)
+    protected override void Activate(ScEntity entity)
     {
         base.Activate(entity);
         Rigidbody _rigidbody = entity.GetComponent<Rigidbody>();

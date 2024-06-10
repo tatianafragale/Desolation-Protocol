@@ -8,9 +8,9 @@ public class ScEntityClaws : ScEntityEnemy
     [SerializeField] private bool _playerInAttackRange = false;
     [SerializeField] private GameObject _claws;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         KeepTracking();
     }
 

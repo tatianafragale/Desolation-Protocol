@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   cooldownTime: 10
   percent: 0.5
+  duration: 1

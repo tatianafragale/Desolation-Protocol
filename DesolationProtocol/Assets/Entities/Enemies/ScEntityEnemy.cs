@@ -37,10 +37,7 @@ public class ScEntityEnemy : ScEntity
     {
         base.Die();
         StopTracking();
-        if (entityName != "Explosive")
-        {
-            Destroy(gameObject, 3);
-        }
+        Destroy(gameObject, 5);
     }
 
     protected void KeepTracking()

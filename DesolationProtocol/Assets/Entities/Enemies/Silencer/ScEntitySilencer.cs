@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ScEntitySilencer : ScEntityEnemy
 {
@@ -39,8 +40,9 @@ public class ScEntitySilencer : ScEntityEnemy
         }
     }
 
-    protected void OnDestroy()
+    protected override void Die()
     {
+        base.Die();
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, silenceDistance, layerMask);
 
         foreach (Collider collider in hitColliders)
