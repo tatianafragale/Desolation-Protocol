@@ -15,4 +15,6 @@ MonoBehaviour:
   title: Teleport
   icon: {fileID: 0}
   cooldownTime: 10
+  charges: 1
   distance: 5
+  teleport: {fileID: 3319828177475789733, guid: d9caf0ed3b9ad34419742f5fcf655979, type: 3}

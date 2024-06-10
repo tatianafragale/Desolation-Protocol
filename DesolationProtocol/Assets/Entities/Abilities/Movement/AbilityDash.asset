@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f27be25a1f2cce4fae085c04e5b7df4, type: 3}
-  m_Name: AbilityHealing
+  m_Script: {fileID: 11500000, guid: 70952fdcfb113284d8b8ea58aaeae325, type: 3}
+  m_Name: AbilityDash
   m_EditorClassIdentifier: 
-  title: 
+  title: Dash
   icon: {fileID: 0}
-  cooldownTime: 10
-  percent: 0.5
+  cooldownTime: 5
+  maxCharges: 2
+  strength: 1500
+  duration: 0.5

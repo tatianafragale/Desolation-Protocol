@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -32,17 +33,14 @@ public class ScEntity : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
-        foreach (ScAbility _ability in abilities)
+        for (int i = 0; i < abilities.Length; i++)
         {
-            if (_ability)
+            if (abilities[i] != null)
             {
-                _ability.cooldown.ResetCooldown();
+                abilities[i] = Instantiate(abilities[i]);
+                //abilities[i].cooldown.ResetCooldown();
             }
         }
-    }
-
-    protected virtual void Start()
-    {
         SetStats();
         health = Stats.maxHealth;
     }

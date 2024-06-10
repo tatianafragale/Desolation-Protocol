@@ -17,9 +17,9 @@ public class ScEntityPlayer : ScEntity
     public bool landed = true;
     public float experience = 0f;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         _jumps = totaljumps;
@@ -28,36 +28,43 @@ public class ScEntityPlayer : ScEntity
 
     protected override void Update()
     {
-        _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
-        FocusRotator.Rotate(FocusRotator.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
+        if (health > 0)
+        {
+            _rigidbody.transform.Rotate(Vector3.up, Input.GetAxis("MouseX") * sens, Space.World);
+            FocusRotator.Rotate(FocusRotator.right, Mathf.Clamp(-1 * Input.GetAxis("MouseY") * sens, -90, 90), Space.World);
+        }
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (movement != Vector3.zero)
+        if (health > 0)
         {
-
-            if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= Stats.movementSpeed)
+            if (movement != Vector3.zero)
             {
-                if (landed)
+
+                if (new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z).magnitude <= Stats.movementSpeed)
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 100, ForceMode.Acceleration);
+                    if (landed)
+                    {
+                        _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 100, ForceMode.Acceleration);
+                    }
+                    else
+                    {
+                        _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 100 * airControl, ForceMode.Acceleration);
+                    }
                 }
                 else
                 {
-                    _rigidbody.AddForce(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * movement * Stats.movementSpeed * 100 * airControl, ForceMode.Acceleration);
+                    //_rigidbody.velocity = _rigidbody.velocity.normalized * Stats.movementSpeed;
                 }
             }
             else
             {
-                _rigidbody.velocity = _rigidbody.velocity.normalized * Stats.movementSpeed;
+                //_rigidbody.velocity = new Vector3(_rigidbody.velocity.x * 0.95f, _rigidbody.velocity.y, _rigidbody.velocity.z * 0.95f);
             }
         }
-        else
-        {
-            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x * 0.9f, _rigidbody.velocity.y, _rigidbody.velocity.z * 0.9f);
-        }
+        //(Quaternion.LookRotation(_rigidbody.transform.forward, _rigidbody.transform.up) * _rigidbody.velocity).normalized.x
 
         _anim.SetFloat("XAxis", movement.x, 0.1f, Time.deltaTime);
         _anim.SetFloat("ZAxis", movement.z, 0.1f, Time.deltaTime);
@@ -95,6 +102,14 @@ public class ScEntityPlayer : ScEntity
     {
         base.Die();
         Invoke("OnDeathLoadMainMenu", 5f);
+        movement = Vector3.zero;
+    }
+
+    private void OnDeathLoadMainMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     //inputs
@@ -105,16 +120,10 @@ public class ScEntityPlayer : ScEntity
             Invoke("OnDeathLoadMainMenu", 5f);
         }
     }
-    private void OnDeathLoadMainMenu()
-    {
-        SceneManager.LoadScene("Main_Menu");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-    }
 
     public void Movement(InputAction.CallbackContext CallbackContext)
     {
-        if (CallbackContext.performed || CallbackContext.canceled)
+        if ((CallbackContext.performed || CallbackContext.canceled) && health > 0)
         {
             movement = new Vector3(CallbackContext.ReadValue<Vector2>().x, 0f, CallbackContext.ReadValue<Vector2>().y);
         }
@@ -122,7 +131,7 @@ public class ScEntityPlayer : ScEntity
 
     public void Jump(InputAction.CallbackContext CallbackContext)
     {
-        if (CallbackContext.performed)
+        if (CallbackContext.performed && health > 0)
         {
             if (_jumps > 0)
             {
@@ -139,15 +148,15 @@ public class ScEntityPlayer : ScEntity
 
     public void Interact(InputAction.CallbackContext CallbackContext)
     {
-        if (CallbackContext.performed)
+        if (CallbackContext.performed && health > 0)
         {
-            
+
         }
     }
 
     public void Shoot(InputAction.CallbackContext CallbackContext)
     {
-        if (CallbackContext.performed)
+        if (CallbackContext.performed && health > 0)
         {
             GetComponent<ScWeapon>().SetShooting(true);
         }
@@ -159,7 +168,7 @@ public class ScEntityPlayer : ScEntity
 
     private void TryAbility(InputAction.CallbackContext CallbackContext, int Selected)
     {
-        if (CallbackContext.performed) TryAbility(Selected);
+        if (CallbackContext.performed && health > 0) TryAbility(Selected);
     }
 
     public void TryAbility0(InputAction.CallbackContext CallbackContext)
