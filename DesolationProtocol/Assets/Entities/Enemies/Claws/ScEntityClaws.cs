@@ -12,6 +12,7 @@ public class ScEntityClaws : ScEntityEnemy
     {
         base.Awake();
         KeepTracking();
+        _claws.SetActive(false);
     }
 
     private void TryAttack()
@@ -21,7 +22,7 @@ public class ScEntityClaws : ScEntityEnemy
             if (_playerInAttackRange)
             {
                 _anim.SetBool("Attacking", true);
-                _claws.SetActive(true);
+                //_claws.SetActive(true);
             }
             else
             {
@@ -49,6 +50,16 @@ public class ScEntityClaws : ScEntityEnemy
     protected override void Die()
     {
         base.Die();
+        _claws.SetActive(false);
+    }
+
+    public void ActiveClaws()
+    {
+        _claws.SetActive(true);
+    }
+
+    public void DeactiveClaws()
+    {
         _claws.SetActive(false);
     }
 }

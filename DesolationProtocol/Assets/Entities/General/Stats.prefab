@@ -47,7 +47,7 @@ MonoBehaviour:
   allStats:
   - title: Player
     statsBase:
-      maxHealth: 100
+      maxHealth: 1000
       regeneration: 0
       armor: 10
       damage: 1000
