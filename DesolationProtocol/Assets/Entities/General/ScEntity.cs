@@ -91,10 +91,8 @@ public class ScEntity : MonoBehaviour
     {
         OnDeath.Invoke();
         _anim.SetTrigger("Death");
-        if (Team == "Enemy" && entityName != "Explosive")
-        {
-            Destroy(gameObject);
-        }
+        Destroy(GetComponent<Rigidbody>());
+        Destroy(GetComponent<CapsuleCollider>());
     }
 
     public virtual void Heal(float heal)

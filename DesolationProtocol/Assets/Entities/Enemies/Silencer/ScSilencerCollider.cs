@@ -20,11 +20,19 @@ public class ScSilencerCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Silencer.Silence(other, true);
+        ScEntity otherEntity = other.GetComponent<ScEntity>();
+        if (otherEntity && Silencer.Team != otherEntity.Team)
+        {
+            Silencer.Silence(other, true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Silencer.Silence(other, false);
+        ScEntity otherEntity = other.GetComponent<ScEntity>();
+        if (otherEntity && Silencer.Team != otherEntity.Team)
+        {
+            Silencer.Silence(other, false);
+        }
     }
 }

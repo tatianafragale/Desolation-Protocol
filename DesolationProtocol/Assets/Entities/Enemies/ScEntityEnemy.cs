@@ -20,25 +20,37 @@ public class ScEntityEnemy : ScEntity
 
     protected override void Update()
     {
-        base.Update();
-        if (!_target)
-        {
-            _target = FindObjectOfType<ScEntityPlayer>().transform;
-        }
         if (_active)
         {
             if (_target)
             {
                 _agent.SetDestination(_target.position);
             }
+            else
+            {
+                _target = FindObjectOfType<ScEntityPlayer>().transform;
+            }
+        }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        StopTracking();
+        if (entityName != "Explosive")
+        {
+            Destroy(gameObject, 3);
         }
     }
 
     protected void KeepTracking()
     {
-        _agent.speed = Stats.movementSpeed;
-        _active = true;
-        _agent.SetDestination(_target.position);
+        if (health > 0)
+        {
+            _agent.speed = Stats.movementSpeed;
+            _active = true;
+            _agent.SetDestination(_target.position);
+        }
     }
 
     protected void StopTracking()
@@ -49,8 +61,11 @@ public class ScEntityEnemy : ScEntity
 
     protected void RotateTracking()
     {
-        _agent.speed = 0;
-        _active = false;
-        _agent.SetDestination(transform.position);
+        if (health > 0)
+        {
+            _agent.speed = 0;
+            _active = false;
+            _agent.SetDestination(transform.position);
+        }
     }
 }

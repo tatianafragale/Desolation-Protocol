@@ -5694,7 +5694,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.909, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4697224650367363516}
   m_Father: {fileID: 4086743372738136574}
@@ -6007,7 +6007,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.125
+      scalar: 0.27
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10675,8 +10675,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1544908230921864807}
-  m_Layer: 8
-  m_Name: GameObject
+  - component: {fileID: 3441943052651253096}
+  m_Layer: 10
+  m_Name: DetectorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10697,6 +10698,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4086743372738136574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3441943052651253096
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100732863034051027}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6296513787861755476
 GameObject:
   m_ObjectHideFlags: 0

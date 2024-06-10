@@ -36,7 +36,6 @@ public class ScEntitySilencer : ScEntityEnemy
             {
                 otherEntity.silencers--;
             }
-            
         }
     }
 
