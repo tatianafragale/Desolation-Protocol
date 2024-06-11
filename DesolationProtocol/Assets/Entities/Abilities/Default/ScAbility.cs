@@ -23,7 +23,7 @@ public class ScAbility : ScriptableObject
         if (_charges > 0)
         {
             Activate(entity);
-            Debug.Log(_charges);
+            //Debug.Log(_charges);
             //Debug.Log("Activated");
         }
         else
@@ -63,7 +63,7 @@ public class ScAbility : ScriptableObject
             cooldown.StartCooldown(cooldownTime / entity.Stats.cooldowns);
             yield return new WaitForSeconds(cooldownTime / entity.Stats.cooldowns);
             _charges++;
-            Debug.Log(_charges);
+            //Debug.Log(_charges);
             StartCoroutine(Cooldown(entity));
         }
     }
