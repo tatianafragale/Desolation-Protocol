@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class ScEntitySilencer : ScEntityEnemy
     [SerializeField] private float walkDistance = 20f;
     [SerializeField] public float silenceDistance = 40f;
     [SerializeField] private LayerMask layerMask;
- 
+
     protected override void Update()
     {
         base.Update();
@@ -26,16 +27,19 @@ public class ScEntitySilencer : ScEntityEnemy
 
     public void Silence(Collider other, bool action)
     {
-        ScEntity otherEntity = other.GetComponent<ScEntity>();
-        if (otherEntity && Team != otherEntity.Team)
+        if (health > 0)
         {
-            if (action)
+            ScEntity otherEntity = other.GetComponent<ScEntity>();
+            if (otherEntity && Team != otherEntity.Team)
             {
-                otherEntity.silencers++;
-            }
-            else
-            {
-                otherEntity.silencers--;
+                if (action)
+                {
+                    otherEntity.silencers++;
+                }
+                else
+                {
+                    otherEntity.silencers--;
+                }
             }
         }
     }
@@ -47,7 +51,11 @@ public class ScEntitySilencer : ScEntityEnemy
 
         foreach (Collider collider in hitColliders)
         {
-            Silence(collider, false);
+            ScEntity otherEntity = collider.GetComponent<ScEntity>();
+            if (otherEntity && Team != otherEntity.Team)
+            {
+                otherEntity.silencers--;
+            }
         }
     }
 

@@ -196,8 +196,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  walkDistance: 20
-  silenceDistance: 40
+  walkDistance: 15
+  silenceDistance: 20
   layerMask:
     serializedVersion: 2
     m_Bits: 384
