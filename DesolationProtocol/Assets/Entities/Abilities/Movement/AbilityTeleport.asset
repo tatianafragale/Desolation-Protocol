@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Teleport
   icon: {fileID: 0}
-  cooldownTime: 45
+  cooldownTime: 1
   maxCharges: 2
   strength: 5
   timeActive: 30

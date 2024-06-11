@@ -20,7 +20,7 @@ public class ScAbilityTeleport : ScAbility
         {
             Rigidbody _rigidbody = entity.GetComponent<Rigidbody>();
             _rigidbody.velocity = new Vector3(0, 0, 0);
-            _rigidbody.transform.position = target.transform.position;
+            _rigidbody.transform.position = target.transform.position + Vector3.up;
             Destroy(target);
         }
     }
