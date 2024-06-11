@@ -18,10 +18,9 @@ public class ScAbilityTeleport : ScAbility
         }
         else
         {
-            Rigidbody _rigidbody = entity.GetComponent<Rigidbody>();
-            _rigidbody.velocity = new Vector3(0, 0, 0);
-            _rigidbody.transform.position = target.transform.position;
-            Debug.Log(_rigidbody.transform.position);
+            Rigidbody rigidbody = entity.GetComponent<Rigidbody>();
+            rigidbody.velocity = new Vector3(0, 0, 0);
+            rigidbody.transform.position = target.transform.position;
             Destroy(target);
             target = null;
         }
@@ -32,7 +31,6 @@ public class ScAbilityTeleport : ScAbility
         base.Activate(entity);
         target = Instantiate(teleport, entity.transform.position, entity.transform.rotation);
         target.GetComponent<ScTeleportObject>().strength = strength;
-        //Debug.Log(target.name);
         Destroy(target, timeActive);
     }
 }
